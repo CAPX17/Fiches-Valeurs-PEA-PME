@@ -822,11 +822,20 @@ table { border-collapse: collapse; width: 100%; }
     opacity: 0.4;
     cursor: help;
     transition: opacity 0.2s ease;
+    margin-left: 12px;
 }
 .auto-mark:hover { opacity: 0.85; }
 
 /* Conteneurs qui hébergent la pastille doivent être positionnés */
-.kpi-card, .kpi-card-sec, .card { position: relative; }
+.kpi-card, .kpi-card-sec, .card, .alert-card { position: relative; }
+
+/* Réserve d'espace à droite pour garantir ≥ 12 px entre tout texte
+   adjacent et la pastille auto-mark (right:14px + largeur 12px → zone
+   "occupée" 26 px à partir du bord droit). 38px = 26 + 12 de marge. */
+.kpi-card,
+.kpi-card-sec,
+.card,
+.alert-card { padding-right: 38px; }
 
 /* ------------------------------------------------------------ */
 /* Mobile burger                                                 */
