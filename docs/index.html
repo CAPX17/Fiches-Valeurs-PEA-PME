@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sensorion (ALSEN.PA) — Fiche d'analyse</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+</head>
+<body>
+
+<button class="burger" id="burger" aria-label="Menu"><span></span></button>
+
+<div class="disclaimer-top">
+    Cette fiche est une note personnelle d'analyse. Elle ne constitue NI conseil en investissement, NI recommandation, NI sollicitation. Investir comporte un risque de perte en capital.
+</div>
+
+<div class="app">
+
+    <!-- ====================== SIDEBAR ====================== -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <div class="logo-mark">F</div>
+            <div class="logo-text">
+                Fiches PEA-PME
+                <small>Dashboard d'analyse</small>
+            </div>
+        </div>
+
+        <div>
+            <div class="sidebar-section-label">Action</div>
+            <ul class="meta-list">
+                <li><span class="k">Ticker</span><span class="v mono">ALSEN.PA</span></li>
+                <li><span class="k">ISIN</span><span class="v mono">FR0012596468</span></li>
+                <li><span class="k">Marché</span><span class="v">Euronext Growth</span></li>
+                <li><span class="k">Secteur</span><span class="v">Biotechnologie</span></li>
+                <li><span class="k">Ville</span><span class="v">Montpellier</span></li>
+                <li><span class="k">PEA-PME</span><span class="v"><span class="badge-pea">éligible</span></span></li>
+            </ul>
+        </div>
+
+        <div>
+            <div class="sidebar-section-label">Navigation</div>
+            <nav class="nav">
+                <a href="#synthese" class="active"><span class="dot"></span>Synthèse</a>
+                <a href="#technique"><span class="dot"></span>Analyse technique</a>
+                <a href="#alertes"><span class="dot"></span>Alertes & catalyseurs</a>
+                <a href="#pipeline"><span class="dot"></span>Pipeline</a>
+                <a href="#perspectives"><span class="dot"></span>Perspectives</a>
+                <a href="#avis"><span class="dot"></span>Avis personnel</a>
+            </nav>
+        </div>
+
+        <div>
+            <div class="sidebar-section-label">Liens utiles</div>
+            <div class="links">
+                <a href="https://www.boursorama.com/cours/1rPALSEN/" target="_blank" rel="noopener">Boursorama<span class="arr">↗</span></a>
+                <a href="https://live.euronext.com/fr/product/equities/FR0012596468-XPAR" target="_blank" rel="noopener">Euronext<span class="arr">↗</span></a>
+                <a href="https://www.sensorion.com/investors/" target="_blank" rel="noopener">Site IR<span class="arr">↗</span></a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ====================== MAIN ====================== -->
+    <main class="main">
+
+        <!-- HEADER -->
+        <header class="page-header" id="synthese">
+            <div class="title">
+                <h1>Sensorion</h1>
+                <div class="ticker">
+                    <span class="pill mono">ALSEN.PA</span>
+                    <span>Euronext Growth Paris</span>
+                </div>
+                <div class="updated">Dernière mise à jour : 30 avril 2026, 17:35 (Europe/Paris)</div>
+            </div>
+            <div class="spark-wrap">
+                <span class="label">30 jours</span>
+                <canvas id="sparkline"></canvas>
+                <span class="delta up mono">+8,42 %</span>
+            </div>
+        </header>
+
+        <!-- KPIs PRINCIPAUX -->
+        <section class="section">
+            <div class="kpi-grid">
+                <div class="kpi-card g1">
+                    <div class="kpi-label">Cours <span class="auto-badge">auto</span></div>
+                    <div class="kpi-value">1,524 €</div>
+                    <div class="kpi-sub up mono">+2,34 % aujourd'hui</div>
+                </div>
+                <div class="kpi-card g2">
+                    <div class="kpi-label">Capitalisation <span class="auto-badge">auto</span></div>
+                    <div class="kpi-value">121,4 M€</div>
+                    <div class="kpi-sub mono">79,7 M actions</div>
+                </div>
+                <div class="kpi-card g3">
+                    <div class="kpi-label">RSI (14) <span class="auto-badge">auto</span></div>
+                    <div class="kpi-value">58,2</div>
+                    <div class="kpi-sub mono">zone neutre</div>
+                </div>
+                <div class="kpi-card g4">
+                    <div class="kpi-label">MACD <span class="auto-badge">auto</span></div>
+                    <div class="kpi-value">+0,012</div>
+                    <div class="kpi-sub up mono">signal haussier</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- KPIs SECONDAIRES -->
+        <section class="section">
+            <div class="kpi-grid-sec">
+                <div class="kpi-card-sec">
+                    <div class="icon i1">MA</div>
+                    <div class="body">
+                        <div class="lbl">Moyenne 50j <span class="auto-badge">auto</span></div>
+                        <div class="val">1,410 €</div>
+                    </div>
+                </div>
+                <div class="kpi-card-sec">
+                    <div class="icon i2">MA</div>
+                    <div class="body">
+                        <div class="lbl">Moyenne 200j <span class="auto-badge">auto</span></div>
+                        <div class="val">1,620 €</div>
+                    </div>
+                </div>
+                <div class="kpi-card-sec">
+                    <div class="icon i3">▲</div>
+                    <div class="body">
+                        <div class="lbl">Plus-haut 52s <span class="auto-badge">auto</span></div>
+                        <div class="val">2,180 €</div>
+                    </div>
+                </div>
+                <div class="kpi-card-sec">
+                    <div class="icon i4">▼</div>
+                    <div class="body">
+                        <div class="lbl">Plus-bas 52s <span class="auto-badge">auto</span></div>
+                        <div class="val">1,050 €</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- COURS 1 AN -->
+        <section class="section" id="technique">
+            <h2 class="section-title"><span class="acc"></span>Cours sur 1 an</h2>
+            <div class="card">
+                <div class="card-header">
+                    <h3>Évolution quotidienne <span class="auto-badge">auto</span></h3>
+                    <div class="meta mono">Mai 2025 — Avr 2026</div>
+                </div>
+                <div class="chart-wrap h-320">
+                    <canvas id="chart-price"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRIO : FIBO / VOLUMES / JAUGE -->
+        <section class="section">
+            <div class="trio-grid">
+
+                <!-- Fibonacci -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Niveaux Fibonacci <span class="auto-badge">auto</span></h3>
+                        <div class="meta">Range 52s</div>
+                    </div>
+                    <table class="fibo">
+                        <thead>
+                            <tr><th>Niveau</th><th>Prix</th><th>Δ</th><th>Statut</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>0,0 %</td>    <td>1,050 €</td><td>−31,1 %</td><td><span class="tag sup">Support</span></td></tr>
+                            <tr><td>23,6 %</td>   <td>1,317 €</td><td>−13,6 %</td><td><span class="tag sup">Support</span></td></tr>
+                            <tr class="current"><td>38,2 %</td><td>1,482 €</td><td>−2,8 %</td><td><span class="tag now">Cours ≈</span></td></tr>
+                            <tr><td>50,0 %</td>   <td>1,615 €</td><td>+6,0 %</td> <td><span class="tag res">Résistance</span></td></tr>
+                            <tr><td>61,8 %</td>   <td>1,748 €</td><td>+14,7 %</td><td><span class="tag res">Résistance</span></td></tr>
+                            <tr><td>100,0 %</td>  <td>2,180 €</td><td>+43,0 %</td><td><span class="tag res">Résistance</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Volumes 30j -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Volumes 30j <span class="auto-badge">auto</span></h3>
+                        <div class="meta mono">moy. 487 k</div>
+                    </div>
+                    <div class="chart-wrap h-220">
+                        <canvas id="chart-volume"></canvas>
+                    </div>
+                </div>
+
+                <!-- Jauge 52w -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Position vs 52 semaines <span class="auto-badge">auto</span></h3>
+                        <div class="meta">Range</div>
+                    </div>
+                    <div class="gauge">
+                        <div class="gauge-bar">
+                            <div class="gauge-cursor" style="left: 41.95%;" data-pct="41,9 %"></div>
+                        </div>
+                        <div class="gauge-edges">
+                            <div>Bas 52s<span class="v mono">1,050 €</span></div>
+                            <div style="text-align:right">Haut 52s<span class="v mono">2,180 €</span></div>
+                        </div>
+                        <div class="gauge-summary">
+                            Cours actuel à <b class="mono">1,524 €</b>, soit <b>41,9 %</b><br>du range 52 semaines.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ALERTES ÉDITORIALES -->
+        <section class="section" id="alertes">
+            <h2 class="section-title"><span class="acc"></span>Alertes & points clés</h2>
+            <div class="alerts-grid">
+
+                <div class="alert-card cat-moat">
+                    <span class="cat-badge">Moat</span>
+                    <h3>Plateforme Institut Pasteur exclusive</h3>
+                    <p>Sensorion bénéficie d'un partenariat exclusif avec l'Institut Pasteur sur la thérapie génique de l'oreille interne, lui donnant un accès privilégié à un savoir-faire scientifique difficilement réplicable.</p>
+                    <p>Cette barrière à l'entrée est renforcée par le portefeuille de propriété intellectuelle propre et un réseau d'experts cliniques internationaux.</p>
+                </div>
+
+                <div class="alert-card cat-catalyseur">
+                    <span class="cat-badge">Catalyseur</span>
+                    <h3>SENS-601 CTA imminent (S1 2026)</h3>
+                    <p>Le dépôt de l'autorisation d'essai clinique pour SENS-601 (thérapie génique GJB2) est attendu au premier semestre 2026, marquant le passage du préclinique à la clinique pour ce second programme.</p>
+                    <p>Un dépôt validé constituerait un catalyseur majeur sur le titre et confirmerait la capacité d'exécution de la plateforme.</p>
+                </div>
+
+                <div class="alert-card cat-finance">
+                    <span class="cat-badge">Finance</span>
+                    <h3>Trésorerie visible jusqu'à fin 2026</h3>
+                    <p>Trésorerie au 31/12/2025 confortée par le PIPE de janvier 2024 et la levée complémentaire de 2025. Le cash runway publié couvre la marche jusqu'à fin 2026.</p>
+                    <p>Risque de dilution à surveiller au-delà : nouvelle levée probable pour financer les phases 2/3.</p>
+                </div>
+
+                <div class="alert-card cat-risque">
+                    <span class="cat-badge">Risque</span>
+                    <h3>Concentration mono-actif clinique</h3>
+                    <p>SENS-501 reste l'unique actif en clinique à ce stade. Tout signal négatif sur les cohortes (tolérance, recrutement, efficacité auditive) pèserait fortement sur la valorisation.</p>
+                    <p>Volatilité structurelle élevée typique d'une biotech micro-cap mono-asset.</p>
+                </div>
+
+                <div class="alert-card cat-pipeline">
+                    <span class="cat-badge">Pipeline</span>
+                    <h3>SENS-501 — Cohorte 3 attendue</h3>
+                    <p>L'essai Audiogene SENS-501 progresse vers la cohorte 3 avec des données préliminaires de tolérance encourageantes sur les premières cohortes.</p>
+                    <p>Lecture de données intermédiaires attendue dans les prochains trimestres ; elles seront le principal driver fondamental court terme.</p>
+                </div>
+
+                <div class="alert-card cat-catalyseur">
+                    <span class="cat-badge">Catalyseur</span>
+                    <h3>IND USA SENS-601 fin 2026</h3>
+                    <p>Au-delà du CTA européen, le dépôt d'une IND auprès de la FDA est planifié pour la fin 2026, ouvrant l'accès au marché américain et à des partenariats potentiels.</p>
+                    <p>Étape cruciale pour valoriser la plateforme à l'international.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PIPELINE -->
+        <section class="section" id="pipeline">
+            <h2 class="section-title"><span class="acc"></span>Pipeline</h2>
+            <div class="card">
+                <table class="pipeline-table">
+                    <thead>
+                        <tr>
+                            <th>Programme</th>
+                            <th>Indication</th>
+                            <th>Stade</th>
+                            <th>Prochaine étape</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>SENS-501</b> (OTOF-GT)</td>
+                            <td>Surdité congénitale OTOF</td>
+                            <td><span class="stade-pill p1">Phase 1/2</span></td>
+                            <td>Recrutement cohorte 3</td>
+                        </tr>
+                        <tr>
+                            <td><b>SENS-601</b> (GJB2-GT)</td>
+                            <td>Surdité congénitale GJB2</td>
+                            <td><span class="stade-pill preclin">Préclinique → CTA</span></td>
+                            <td>CTA EU S1 2026 / IND US fin 2026</td>
+                        </tr>
+                        <tr>
+                            <td><b>SENS-401</b> (Arazasétron)</td>
+                            <td>Surdités sensorineurales</td>
+                            <td><span class="stade-pill p2">Phase 2</span></td>
+                            <td>Décision repositionnement</td>
+                        </tr>
+                        <tr>
+                            <td><b>OTOF biomarkers</b></td>
+                            <td>Diagnostic compagnon</td>
+                            <td><span class="stade-pill disc">Discovery</span></td>
+                            <td>Validation analytique</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- PERSPECTIVES -->
+        <section class="section" id="perspectives">
+            <h2 class="section-title"><span class="acc"></span>Perspectives</h2>
+            <div class="persp-grid">
+                <div class="persp-card ct">
+                    <div class="head">
+                        <h3>Court terme</h3>
+                        <span class="horizon">1-8 semaines</span>
+                    </div>
+                    <ul>
+                        <li>Assemblée générale du 11 mai 2026</li>
+                        <li>Dépôt CTA SENS-601 imminent</li>
+                        <li>Communiqué T1 2026 attendu</li>
+                        <li>Rebond technique au-dessus de la MA50</li>
+                    </ul>
+                </div>
+                <div class="persp-card mt">
+                    <div class="head">
+                        <h3>Moyen terme</h3>
+                        <span class="horizon">3-12 mois</span>
+                    </div>
+                    <ul>
+                        <li>IND USA SENS-601 fin 2026</li>
+                        <li>Lecture intermédiaire SENS-501 cohorte 3</li>
+                        <li>Capacité de levée complémentaire</li>
+                        <li>Recherche de partenariat industriel</li>
+                    </ul>
+                </div>
+                <div class="persp-card lt">
+                    <div class="head">
+                        <h3>Long terme</h3>
+                        <span class="horizon">2-5 ans</span>
+                    </div>
+                    <ul>
+                        <li>Phase 2/3 SENS-501 multi-pays</li>
+                        <li>Valorisation plateforme thérapie génique</li>
+                        <li>Optionalité M&A pharma</li>
+                        <li>Pipeline étendu au-delà de l'OTOF/GJB2</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- AVIS PERSONNEL -->
+        <section class="section" id="avis">
+            <h2 class="section-title"><span class="acc"></span>Avis personnel</h2>
+            <div class="avis">
+                <div class="note mono">7<span class="denom">/10</span></div>
+                <div class="body">
+                    <div class="label">Conviction · Sensorion</div>
+                    <div class="text">
+                        <p>Dossier de qualité pour un investisseur PEA-PME prêt à accepter une volatilité élevée. La plateforme thérapie génique adossée à l'Institut Pasteur représente un actif rare en Europe sur l'oreille interne.</p>
+                        <p>Le prochain catalyseur lisible (CTA SENS-601) est crédible et bien cadré dans le temps. Sous réserve de l'exécution clinique, la valorisation actuelle paraît raisonnable au regard du potentiel de la plateforme.</p>
+                        <p>Position à dimensionner avec prudence : risque mono-actif clinique, dilution probable, marché de niche. Ne représente pas une recommandation d'achat.</p>
+                    </div>
+                </div>
+                <div class="intensite modere">Modéré</div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="page-footer">
+            <div class="row">
+                <div class="sources">
+                    <strong>Sources :</strong>
+                    PRT 1S ALSEN (29/04/2026) ·
+                    businesswire.com (05/01/2024) ·
+                    yfinance (cours et indicateurs auto) ·
+                    site IR Sensorion
+                </div>
+                <div>Généré le 30/04/2026 17:35 (Europe/Paris)</div>
+            </div>
+            <div style="margin-top:12px">
+                <strong>Disclaimer NPC.</strong> Ne constitue ni conseil en investissement, ni recommandation personnalisée, ni sollicitation. L'auteur peut détenir une position sur la valeur. Performances passées non indicatives. Investir comporte un risque de perte en capital partielle ou totale.
+            </div>
+        </footer>
+
+    </main>
+</div>
+
+<!-- ====================== SCRIPTS ====================== -->
+<script>
+// Mock data L1 (livrable 1) — remplacé par tojson Jinja en L2
+const sparkData = [1.405,1.412,1.398,1.421,1.418,1.434,1.442,1.428,1.451,1.467,1.461,1.473,1.485,1.479,1.491,1.502,1.498,1.488,1.495,1.510,1.518,1.512,1.495,1.487,1.502,1.515,1.508,1.519,1.524,1.524];
+
+const priceLabels = ["Mai 25","Mai 25","Juin 25","Juin 25","Juin 25","Juil 25","Juil 25","Juil 25","Aoû 25","Aoû 25","Aoû 25","Sept 25","Sept 25","Sept 25","Oct 25","Oct 25","Oct 25","Nov 25","Nov 25","Nov 25","Déc 25","Déc 25","Déc 25","Jan 26","Jan 26","Jan 26","Fév 26","Fév 26","Fév 26","Mar 26","Mar 26","Mar 26","Avr 26","Avr 26","Avr 26"];
+const priceData = [1.85,1.92,2.05,2.18,2.11,2.04,1.97,1.83,1.71,1.65,1.58,1.62,1.55,1.49,1.42,1.35,1.28,1.18,1.11,1.05,1.12,1.20,1.27,1.33,1.39,1.36,1.42,1.45,1.41,1.38,1.43,1.47,1.50,1.49,1.524];
+
+const volLabels = Array.from({length:30}, (_,i)=>`J-${30-i}`);
+const volData = [412,538,621,498,725,389,612,547,468,712,829,556,478,395,640,712,1023,892,605,498,567,623,732,895,478,512,604,712,548,487];
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (typeof Chart === 'undefined') return;
+    Chart.defaults.font.family = "'Inter', sans-serif";
+    Chart.defaults.color = '#a3aed0';
+
+    // SPARKLINE
+    const spk = document.getElementById('sparkline');
+    if (spk) {
+        const isUp = sparkData[sparkData.length-1] >= sparkData[0];
+        const color = isUp ? '#01b574' : '#e31a1a';
+        new Chart(spk, {
+            type: 'line',
+            data: {
+                labels: sparkData.map((_,i)=>i),
+                datasets: [{ data: sparkData, borderColor: color, borderWidth: 2, pointRadius: 0, tension: 0.35, fill: false }]
+            },
+            options: {
+                responsive: false, animation: false,
+                plugins: { legend: { display: false }, tooltip: { enabled: false } },
+                scales: { x: { display: false }, y: { display: false } },
+                elements: { line: { capBezierPoints: true } }
+            }
+        });
+    }
+
+    // CHART PRIX 1 AN
+    const cp = document.getElementById('chart-price');
+    if (cp) {
+        const ctx = cp.getContext('2d');
+        const grad = ctx.createLinearGradient(0, 0, 0, 320);
+        grad.addColorStop(0, 'rgba(67, 24, 255, 0.45)');
+        grad.addColorStop(1, 'rgba(67, 24, 255, 0)');
+        new Chart(cp, {
+            type: 'line',
+            data: {
+                labels: priceLabels,
+                datasets: [{
+                    label: 'Cours (€)',
+                    data: priceData,
+                    borderColor: '#4318ff',
+                    backgroundColor: grad,
+                    borderWidth: 2,
+                    pointRadius: 0,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: '#4318ff',
+                    pointHoverBorderColor: '#ffffff',
+                    pointHoverBorderWidth: 2,
+                    tension: 0.25,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false, animation: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: '#1a2456',
+                        borderColor: '#4318ff',
+                        borderWidth: 1,
+                        padding: 12,
+                        titleColor: '#ffffff',
+                        bodyColor: '#a3aed0',
+                        bodyFont: { family: "'JetBrains Mono', monospace" },
+                        callbacks: { label: (c) => `${c.parsed.y.toFixed(3)} €` }
+                    }
+                },
+                scales: {
+                    x: { grid: { display: false }, ticks: { color: '#6b7394', maxTicksLimit: 8 } },
+                    y: {
+                        grid: { color: 'rgba(45, 58, 107, 0.4)', drawBorder: false },
+                        ticks: { color: '#6b7394', font: { family: "'JetBrains Mono', monospace" }, callback: (v) => v.toFixed(2) }
+                    }
+                }
+            }
+        });
+    }
+
+    // CHART VOLUMES 30J
+    const cv = document.getElementById('chart-volume');
+    if (cv) {
+        new Chart(cv, {
+            type: 'bar',
+            data: {
+                labels: volLabels,
+                datasets: [{
+                    data: volData,
+                    backgroundColor: 'rgba(0, 212, 255, 0.55)',
+                    hoverBackgroundColor: '#00d4ff',
+                    borderRadius: 3,
+                    borderSkipped: false
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false, animation: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: '#1a2456',
+                        borderColor: '#00d4ff',
+                        borderWidth: 1,
+                        padding: 10,
+                        titleColor: '#ffffff',
+                        bodyColor: '#a3aed0',
+                        bodyFont: { family: "'JetBrains Mono', monospace" },
+                        callbacks: { label: (c) => `${c.parsed.y} k titres` }
+                    }
+                },
+                scales: {
+                    x: { grid: { display: false }, ticks: { color: '#6b7394', maxTicksLimit: 6 } },
+                    y: { grid: { color: 'rgba(45, 58, 107, 0.4)', drawBorder: false }, ticks: { color: '#6b7394', font: { family: "'JetBrains Mono', monospace" }, callback: (v) => v + 'k' } }
+                }
+            }
+        });
+    }
+
+    // BURGER mobile
+    const burger = document.getElementById('burger');
+    const sidebar = document.getElementById('sidebar');
+    if (burger && sidebar) {
+        burger.addEventListener('click', () => sidebar.classList.toggle('open'));
+        sidebar.querySelectorAll('a').forEach(a => a.addEventListener('click', () => sidebar.classList.remove('open')));
+    }
+
+    // Smooth scroll + active nav
+    const navLinks = document.querySelectorAll('.nav a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const id = link.getAttribute('href').slice(1);
+            const tgt = document.getElementById(id);
+            if (tgt) tgt.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+        });
+    });
+});
+</script>
+
+</body>
+</html>
