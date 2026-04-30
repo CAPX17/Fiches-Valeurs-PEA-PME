@@ -459,9 +459,12 @@ table { border-collapse: collapse; width: 100%; }
     font-size: 12px;
 }
 
-.chart-wrap { position: relative; }
-.chart-wrap.h-320 { height: 320px; }
-.chart-wrap.h-220 { height: 220px; }
+.chart-wrap {
+    position: relative;
+    padding-top: 16px;
+}
+.chart-wrap.h-320 { height: calc(320px + 16px); }
+.chart-wrap.h-220 { height: calc(220px + 16px); }
 
 /* Trio de cards : fibo / volumes / jauge */
 .trio-grid {
