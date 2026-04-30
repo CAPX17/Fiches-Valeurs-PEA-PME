@@ -16,8 +16,9 @@
 
 <button class="burger" id="burger" aria-label="Menu"><span></span></button>
 
-<div class="disclaimer-top">
-    Cette fiche est une note personnelle d'analyse. Elle ne constitue NI conseil en investissement, NI recommandation, NI sollicitation. Investir comporte un risque de perte en capital.
+<div class="disclaimer-top" id="disclaimer-top">
+    <span class="disclaimer-top-text">Note personnelle d'analyse — ni conseil, ni recommandation, ni sollicitation. Risque de perte en capital. Voir disclaimer complet en bas de page.</span>
+    <button class="disclaimer-top-close" id="disclaimer-top-close" type="button" aria-label="Fermer le bandeau">×</button>
 </div>
 
 <div class="app">
@@ -366,6 +367,23 @@
 <!-- ====================== SCRIPTS ====================== -->
 <script>
 const CHART_DATA = {{ charts | tojson }};
+
+document.addEventListener('DOMContentLoaded', () => {
+    const DISCLAIMER_KEY = 'disclaimer-dismissed-v1';
+    const banner = document.getElementById('disclaimer-top');
+    const closeBtn = document.getElementById('disclaimer-top-close');
+    if (banner && closeBtn) {
+        try {
+            if (localStorage.getItem(DISCLAIMER_KEY) === 'true') {
+                banner.classList.add('is-hidden');
+            }
+        } catch (_) { /* localStorage indisponible : on laisse visible */ }
+        closeBtn.addEventListener('click', () => {
+            banner.classList.add('is-hidden');
+            try { localStorage.setItem(DISCLAIMER_KEY, 'true'); } catch (_) {}
+        });
+    }
+});
 
 document.addEventListener('DOMContentLoaded', () => {
     if (typeof Chart === 'undefined') return;
