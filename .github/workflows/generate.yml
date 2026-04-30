@@ -63,11 +63,11 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if [[ -n "$(git status --porcelain docs/)" ]]; then
-            git add docs/
-            git commit -m "chore(auto): regen docs/ from yfinance [skip ci]"
+          if [[ -n "$(git status --porcelain docs/ data/)" ]]; then
+            git add docs/ data/
+            git commit -m "chore(auto): regen docs/ + data/ from yfinance [skip ci]"
             git push origin HEAD:main
             echo "Commit auto poussé: $(git rev-parse HEAD)"
           else
-            echo "Aucun changement dans docs/"
+            echo "Aucun changement dans docs/ ni data/"
           fi
