@@ -55,7 +55,19 @@ def _safe_last(series: pd.Series) -> float | None:
 
 
 def _rsi_fallback(close: pd.Series, length: int = 14) -> pd.Series:
-    """RSI Wilder pur pandas en fallback si pandas_ta indisponible."""
+    """RSI de Wilder en fallback pandas pur (compatible pandas_ta).
+
+    Formule Wilder récursive :
+        avg_gain_t = (avg_gain_{t-1} * (N-1) + gain_t) / N
+        avg_gain_t = (1 - 1/N) * avg_gain_{t-1} + (1/N) * gain_t
+
+    pandas .ewm(alpha=1/N, adjust=False) implémente exactement cette
+    récurrence. Ce N'EST PAS un EMA standard (qui utiliserait alpha =
+    2/(N+1) = 2/15 pour span=14). Le warm-up des 14 premières barres
+    diffère légèrement du Wilder textbook (qui seed via moyenne simple),
+    écart négligeable après ~50 périodes ; identique au comportement
+    de pandas_ta.rsi().
+    """
     delta = close.diff()
     gain = delta.clip(lower=0)
     loss = -delta.clip(upper=0)
