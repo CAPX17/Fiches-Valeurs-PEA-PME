@@ -1,0 +1,190 @@
+# Fiche éditoriale Sensorion (ALSEN.PA)
+# Source principale : analyse personnelle 29/04/2026 18h43 (PRT)
+# Toutes les données factuelles citées ci-dessous sont issues de la source
+# documentée — aucune extrapolation.
+
+ticker: ALSEN.PA
+isin: FR0012596468
+nom: Sensorion
+marche: Euronext Growth Paris
+secteur: Biotechnologie
+ville: Montpellier, France
+pea_pme_eligible: true
+
+liens:
+  boursorama: https://www.boursorama.com/cours/1rPALSEN/
+  euronext: https://live.euronext.com/fr/product/equities/FR0012596468-XPAR
+  site_ir: https://www.sensorion.com/investors/
+
+# -----------------------------------------------------------------------------
+# Alertes & points clés (cards éditoriales, ordre = ordre d'affichage)
+# Catégories autorisées : MOAT / CATALYSEUR / RISQUE / FINANCE / PIPELINE
+# -----------------------------------------------------------------------------
+alertes:
+
+  - categorie: MOAT
+    titre: Plateforme Institut Pasteur — licences exclusives jusqu'en 2028
+    description: |
+      Accord-cadre signé le 27/05/2019 avec l'Institut Pasteur et l'Institut
+      de l'Audition (Pr Christine Petit, 25 ans d'expertise mondiale en
+      génétique auditive), prolongé jusqu'au 31/12/2028.
+
+      Sensorion détient une option de licences exclusives sur l'ensemble des
+      candidats médicaments issus de la collaboration — barrière à l'entrée
+      qu'aucun concurrent (Regeneron, Lilly) ne peut reproduire en Europe.
+      Deux programmes déjà générés (SENS-501, SENS-601), un troisième
+      explicitement attendu avant 2028. Clause de résiliation en cas de
+      changement de contrôle non agréé : protection contre OPA hostile.
+
+  - categorie: FINANCE
+    titre: Sanofi 20 M€ dans le tour de 60 M€ de janvier 2026
+    description: |
+      Financement total 60 M€ bouclé en janvier 2026, dont 20 M€ apportés
+      par Sanofi en investissement stratégique (~11 % de la capitalisation
+      d'environ 190 M€). Position institutionnelle significative d'un Big
+      Pharma mondial qui dispose d'équipes d'analyse spécialisées en
+      thérapie génique.
+
+      Lecture : signal de validation scientifique fort, sans pour autant
+      constituer une garantie commerciale.
+
+  - categorie: CATALYSEUR
+    titre: SENS-601 — CTA Europe S1 2026 imminent
+    description: |
+      Soumission de l'autorisation d'essai clinique pour SENS-601 (thérapie
+      génique GJB2) attendue au S1 2026, suivie d'une IND USA d'ici fin
+      2026. Interactions réglementaires FDA + EMA actives depuis le T3 2025.
+
+      Le gène GJB2 (connexine 26) est responsable de 30 à 40 % de
+      l'ensemble des surdités génétiques dans le monde, soit un marché
+      adressable 30 à 40 fois plus large que celui d'OTOF (SENS-501,
+      ~1 % des cas).
+
+  - categorie: PIPELINE
+    titre: SENS-501 — Cohorte 2 confirmée à 6 mois (23/03/2026)
+    description: |
+      Données 6 mois Cohorte 2 publiées le 23/03/2026 : maintien des
+      améliorations en audiométrie tonale chez 2 patients sur 3 à dose
+      haute, durabilité du signal démontrée, relation dose-réponse entre
+      Cohorte 1 et Cohorte 2.
+
+      Sécurité exemplaire : 0 événement indésirable grave sur 6
+      nourrissons/jeunes enfants (6-31 mois). Cohorte 3 à dose plus haute
+      envisagée — prochain catalyseur clinique majeur.
+
+  - categorie: FINANCE
+    titre: Trésorerie 47,5 M€ — runway fin S1 2027
+    description: |
+      Trésorerie 47,5 M€ au 31/12/2025 (FY2025 publié le 18/03/2026),
+      confortée par le financement 60 M€ de janvier 2026. Le runway publié
+      couvre la marche jusqu'à fin S1 2027, soit environ 14 mois sans
+      pression de financement.
+
+      Une nouvelle levée sera nécessaire après S1 2027 pour financer la
+      suite du développement clinique.
+
+  - categorie: RISQUE
+    titre: Stade précoce, risque binaire et concurrence Big Pharma
+    description: |
+      Le dossier reste un pari clinique sur des effectifs faibles (Phase
+      1/2). La route vers la Phase 3 puis l'AMM est longue (5-8 ans
+      minimum) et la concurrence (Regeneron via Akouos, Lilly via Decibel)
+      dispose de moyens sans commune mesure.
+
+      ~515 M actions post-levée janvier 2026 ; nouvelle levée nécessaire
+      post-S1 2027. Volatilité structurelle élevée typique d'une biotech
+      micro-cap.
+
+# -----------------------------------------------------------------------------
+# Pipeline (uniquement programmes confirmés dans la source)
+# Stade_class : p1 / p2 / preclin / disc (couleurs CSS)
+# -----------------------------------------------------------------------------
+pipeline:
+  - programme: SENS-501 (OTOF-GT)
+    indication: Surdité congénitale OTOF (~1 % des cas)
+    stade: Phase 1/2
+    stade_class: p1
+    prochaine_etape: Cohorte 3 (dose haute) · données durabilité
+
+  - programme: SENS-601 (GJB2-GT)
+    indication: Surdité congénitale GJB2 (30-40 % des cas)
+    stade: Préclinique → CTA
+    stade_class: preclin
+    prochaine_etape: CTA Europe S1 2026 · IND USA fin 2026
+
+  - programme: SENS-40
+    indication: SSNHL · Implant cochléaire · Cisplatine
+    stade: Phase 2b / 2a (×3)
+    stade_class: p2
+    prochaine_etape: Données Phase 2b SSNHL
+
+  - programme: Programme 3+ (futur)
+    indication: Autre surdité génétique — TBD
+    stade: Recherche
+    stade_class: disc
+    prochaine_etape: Émergence avant 2028 (accord Pasteur)
+
+# -----------------------------------------------------------------------------
+# Perspectives CT / MT / LT
+# -----------------------------------------------------------------------------
+perspectives:
+  court_terme:
+    horizon: 1-8 semaines
+    points:
+      - AG mixte du 11 mai 2026 (Paris, Square Louvois, 14h00 CET) — mise à jour stratégie
+      - Soumission CTA SENS-601 imminente
+      - Résistance technique immédiate à 0,37 € (23,6 % Fib)
+      - Support court terme à 0,30 € (PRT horizontal)
+
+  moyen_terme:
+    horizon: 3-12 mois
+    points:
+      - SENS-601 — IND USA d'ici fin 2026
+      - SENS-501 — données Cohorte 3 (catalyseur clinique majeur)
+      - SENS-40 — résultats Phase 2b SSNHL
+      - Trésorerie sécurisée fin S1 2027 — pas de dilution forcée
+      - 3ᵉ programme issu de la plateforme Pasteur possible avant 2028
+
+  long_terme:
+    horizon: 2-5 ans
+    points:
+      - Phase 2/3 SENS-501 si Cohorte 3 positive
+      - SENS-601 Phase 1 puis Phase 2 GJB2
+      - Partenariat ou deal Big Pharma post-données pivots
+      - Plateforme Pasteur — émergence d'un 3ᵉ programme avant 2028
+      - Consensus à 1,65 € (Boursorama) — risque binaire intégré
+
+# -----------------------------------------------------------------------------
+# Avis personnel (note explicitement citée dans la source : 7/10)
+# -----------------------------------------------------------------------------
+avis:
+  note: 7
+  intensite: MODÉRÉ   # FORT / MODÉRÉ / FAIBLE
+  texte: |
+    Plateforme exclusive Pasteur = moat structurel. Sanofi 20 M€ pour
+    ~11 % de la capitalisation = validation Big Pharma significative.
+    SENS-601 (GJB2) ouvre un marché 30-40× plus large que celui d'OTOF.
+    Cours en zone basse, catalyseur imminent (CTA).
+
+    L'élément le plus structurant reste l'accord-cadre exclusif avec
+    l'Institut Pasteur / Institut de l'Audition prolongé jusqu'en 2028.
+    Sensorion s'est assuré que toutes les découvertes du Pr Christine
+    Petit en thérapie génique auditive lui reviennent en licence
+    exclusive — barrière à l'entrée que les concurrents (Regeneron,
+    Lilly) ne peuvent pas reproduire. SENS-501 et SENS-601 sont les
+    deux premiers produits de cette plateforme, un troisième programme
+    avant 2028 est probable.
+
+    Position à dimensionner avec prudence : risque binaire clinique,
+    n faibles, levée nécessaire post-S1 2027, concurrence Big Pharma.
+    Ne constitue ni conseil en investissement ni recommandation.
+
+# -----------------------------------------------------------------------------
+# Sources
+# -----------------------------------------------------------------------------
+sources:
+  - PRT 1S ALSEN (29/04/2026 17:34)
+  - Sensorion FY2025 (18/03/2026) — trésorerie 47,5 M€ · runway fin S1 2027
+  - businesswire.com (05/01/2024) — accord Pasteur prolongé 2028
+  - businesswire.com (20/04/2026) — AG 11 mai 2026
+  - Sensorion (23/03/2026) — SENS-501 données 6M Cohorte 2
