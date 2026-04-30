@@ -1,6 +1,6 @@
 # Données pour synthèse IA — Sensorion (ALSEN.PA)
 
-**Date de génération du dump** : 2026-04-30T22:09:55+00:00
+**Date de génération du dump** : 2026-04-30T22:39:58+00:00
 **Source** : yfinance + content/ALSEN.yaml
 
 ---
@@ -160,37 +160,38 @@ micro-cap.
 
 - Score précédent : 7
 - Force du signal précédente : MODÉRÉ
-- Date génération précédente : 2026-04-29
+- Date génération précédente : 2026-04-30
 - Texte de synthèse précédent :
-  > L'accord-cadre exclusif avec l'Institut Pasteur et l'Institut de
-  > l'Audition (Pr Christine Petit), prolongé jusqu'au 31/12/2028,
-  > constitue un actif structurel : Sensorion détient une option de
-  > licence exclusive sur l'ensemble des candidats issus de la
-  > collaboration. SENS-501 et SENS-601 sont les deux premiers
-  > programmes générés par cette plateforme.
+  > Le cours affiche un rebond de +10,23 % le 30 avril 2026 (0,4040 €,
+  > volume 2,2 M), sans communiqué officiel identifié comme déclencheur.
+  > La position dans le range 52 semaines reste basse (24,5 %, plancher
+  > à 0,2730 €). Le RSI(14) à 42 est en zone neutre ; le MACD à −0,0152
+  > demeure négatif. Le cours évolue 3,3 % sous la MA50 (0,4177 €) et
+  > 14,7 % au-dessus de la MA200 (0,3523 €).
   >
-  > Le tour de financement de 60 M€ bouclé en janvier 2026, dont
-  > 20 M€ apportés par Sanofi (~11 % de la capitalisation), inscrit
-  > une position institutionnelle d'un Big Pharma au capital. La
-  > trésorerie 47,5 M€ au 31/12/2025, complétée par cette levée,
-  > sécurise un runway jusqu'à fin S1 2027.
+  > Pas d'annonce clinique ou réglementaire notable depuis la dernière
+  > revue. Les données fondamentales sont inchangées : trésorerie 47,5 M€
+  > au 31/12/2025, runway affiché jusqu'à fin S1 2027, tour de 60 M€
+  > (dont 20 M€ Sanofi) bouclé en janvier 2026. Les données 6 mois
+  > Cohorte 2 SENS-501 (23/03/2026) restent le dernier catalyseur
+  > clinique documenté.
   >
-  > SENS-601 cible le gène GJB2, responsable de 30 à 40 % des
-  > surdités génétiques (vs ~1 % pour OTOF/SENS-501). La soumission
-  > CTA Europe est attendue au S1 2026, suivie d'une IND USA fin
-  > 2026. Le risque clinique reste binaire (Phase 1/2, effectifs
-  > faibles), avec une concurrence Big Pharma significative
-  > (Regeneron via Akouos, Lilly via Decibel) et une nouvelle levée
-  > nécessaire post-S1 2027.
+  > L'AG mixte du 11 mai 2026 (Paris) est le prochain événement de
+  > calendrier, avec une mise à jour stratégique attendue. La soumission
+  > CTA SENS-601 (GJB2, ~30-40 % des surdités génétiques) est confirmée
+  > au S1 2026 ; des données précliniques SENS-601 seront présentées en
+  > poster à l'ASGCT (Boston, mai 2026). Le risque binaire lié au stade
+  > clinique précoce et la nécessité d'une nouvelle levée post-S1 2027
+  > restent les principaux facteurs limitants.
 - Facteurs positifs précédents :
-  - Accord exclusif Institut Pasteur prolongé jusqu'en 2028 (moat structurel)
-  - Sanofi présent au capital pour 20 M€ (~11 %) — validation Big Pharma
-  - SENS-601/GJB2 adresse 30-40 % du marché des surdités génétiques
-  - Données 6M Cohorte 2 SENS-501 confirmées (23/03/2026)
-  - Runway sécurisé jusqu'à fin S1 2027 (trésorerie 47,5 M€)
+  - Rebond intraday +10,23 % le 30/04/2026 (volume 2,2 M, sans annonce identifiée)
+  - AG mixte 11 mai 2026 — mise à jour stratégique imminente
+  - CTA SENS-601 (GJB2, 30-40 % des surdités génétiques) confirmé S1 2026
+  - Poster ASGCT SENS-601 (Boston, mai 2026) — visibilité scientifique
+  - Runway trésorerie sécurisé jusqu'à fin S1 2027 (47,5 M€ au 31/12/2025)
 - Facteurs négatifs précédents :
+  - MACD −0,0152 (zone négative) ; cours 3,3 % sous la MA50
+  - {'Variation 7 jours': '−3,93 % — sous-performance à court terme'}
   - Stade clinique précoce (Phase 1/2) — risque binaire élevé
-  - ~515 M actions post-levée janvier 2026 — dilution déjà significative
+  - ~515 M actions post-levée janvier 2026 — dilution structurelle significative
   - Nouvelle levée nécessaire après S1 2027
-  - Concurrence Big Pharma (Regeneron, Lilly) avec moyens supérieurs
-  - Volatilité structurelle typique d'une biotech micro-cap
