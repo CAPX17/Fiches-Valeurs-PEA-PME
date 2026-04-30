@@ -181,14 +181,25 @@ def build_context(
         if not v.empty:
             avg_volume = float(v.mean())
 
-    avis = editorial.get("avis", {}) or {}
-    intensite = (avis.get("intensite") or "").upper()
-    intensite_class = {
+    synthese = editorial.get("synthese_ia") or editorial.get("avis") or {}
+    force_signal_raw = (
+        synthese.get("force_signal") or synthese.get("intensite") or ""
+    ).upper()
+    force_signal_class = {
         "FORT": "fort",
         "MODÉRÉ": "modere",
         "MODERE": "modere",
         "FAIBLE": "faible",
-    }.get(intensite, "modere")
+    }.get(force_signal_raw, "modere")
+    score = synthese.get("score") if synthese.get("score") is not None else synthese.get("note")
+    texte_synthese = synthese.get("texte_synthese") or synthese.get("texte") or ""
+    date_gen = synthese.get("date_generation")
+    if hasattr(date_gen, "strftime"):
+        date_gen_str = date_gen.strftime("%d/%m/%Y")
+    elif date_gen:
+        date_gen_str = str(date_gen)
+    else:
+        date_gen_str = None
 
     generated_at = datetime.now(PARIS_TZ).strftime("%d/%m/%Y %H:%M")
 
@@ -236,11 +247,14 @@ def build_context(
         "alertes": editorial.get("alertes", []) or [],
         "pipeline": editorial.get("pipeline", []) or [],
         "perspectives": editorial.get("perspectives", {}) or {},
-        "avis": {
-            "note": avis.get("note"),
-            "intensite_label": avis.get("intensite") or "MODÉRÉ",
-            "intensite_class": intensite_class,
-            "texte": avis.get("texte") or "",
+        "synthese_ia": {
+            "score": score,
+            "force_signal_label": force_signal_raw or "MODÉRÉ",
+            "force_signal_class": force_signal_class,
+            "texte": texte_synthese,
+            "facteurs_positifs": synthese.get("facteurs_positifs") or [],
+            "facteurs_negatifs": synthese.get("facteurs_negatifs") or [],
+            "date_generation": date_gen_str,
         },
         "sources": editorial.get("sources", []) or [],
         "footer": {"generated_at": generated_at},

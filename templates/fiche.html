@@ -56,7 +56,7 @@
                 <a href="#alertes"><span class="dot"></span>Alertes & catalyseurs</a>
                 <a href="#pipeline"><span class="dot"></span>Pipeline</a>
                 <a href="#perspectives"><span class="dot"></span>Perspectives</a>
-                <a href="#avis"><span class="dot"></span>Avis personnel</a>
+                <a href="#synthese-ia"><span class="dot"></span>Synthèse IA</a>
             </nav>
         </div>
 
@@ -323,21 +323,56 @@
         </section>
         {% endif %}
 
-        <!-- AVIS PERSONNEL -->
-        {% if avis.note is not none %}
-        <section class="section" id="avis">
-            <h2 class="section-title"><span class="acc"></span>Avis personnel</h2>
-            <div class="avis">
-                <div class="note mono">{{ avis.note }}<span class="denom">/10</span></div>
+        <!-- SYNTHÈSE IA -->
+        {% if synthese_ia.score is not none %}
+        <section class="section" id="synthese-ia">
+            <h2 class="section-title"><span class="acc"></span>Synthèse IA</h2>
+            <div class="section-subtitle">Analyse générée automatiquement à partir des données factuelles disponibles</div>
+
+            <div class="ia-banner">
+                <span class="ia-banner-icon">⚡</span>
+                <span class="ia-banner-text">Synthèse générée par IA à partir des données yfinance, communiqués officiels et publications. Aucune intervention humaine éditoriale. Vérifiez toujours les sources avant toute décision.</span>
+            </div>
+
+            <div class="avis synthese-ia">
+                <div class="note mono">{{ synthese_ia.score }}<span class="denom">/10</span></div>
                 <div class="body">
-                    <div class="label">Conviction · {{ meta.nom }}</div>
+                    <div class="label">Indicateur synthétique · {{ meta.nom }}</div>
                     <div class="text">
-                        {% for para in (avis.texte or '').strip().split('\n\n') %}
+                        {% for para in (synthese_ia.texte or '').strip().split('\n\n') %}
                             {% if para.strip() %}<p>{{ para.strip() }}</p>{% endif %}
                         {% endfor %}
                     </div>
+
+                    {% if synthese_ia.facteurs_positifs or synthese_ia.facteurs_negatifs %}
+                    <div class="factors-grid">
+                        {% if synthese_ia.facteurs_positifs %}
+                        <div class="factors-col factors-pos">
+                            <div class="factors-head"><span class="factors-arrow">↗</span> Facteurs positifs</div>
+                            <ul>
+                                {% for f in synthese_ia.facteurs_positifs %}<li>{{ f }}</li>{% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+                        {% if synthese_ia.facteurs_negatifs %}
+                        <div class="factors-col factors-neg">
+                            <div class="factors-head"><span class="factors-arrow">↘</span> Facteurs négatifs</div>
+                            <ul>
+                                {% for f in synthese_ia.facteurs_negatifs %}<li>{{ f }}</li>{% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+
+                    {% if synthese_ia.date_generation %}
+                    <div class="gen-date">Synthèse générée le {{ synthese_ia.date_generation }}</div>
+                    {% endif %}
                 </div>
-                <div class="intensite {{ avis.intensite_class }}">{{ avis.intensite_label | capitalize }}</div>
+                <div class="intensite {{ synthese_ia.force_signal_class }}">
+                    <div class="intensite-label">Force du signal</div>
+                    <div class="intensite-value">{{ synthese_ia.force_signal_label | capitalize }}</div>
+                </div>
             </div>
         </section>
         {% endif %}
@@ -353,7 +388,7 @@
                 <div>Généré le {{ footer.generated_at }} (Europe/Paris)</div>
             </div>
             <div style="margin-top:12px">
-                <strong>Disclaimer NPC.</strong> Ne constitue ni conseil en investissement, ni recommandation personnalisée, ni sollicitation. L'auteur peut détenir une position sur la valeur. Performances passées non indicatives. Investir comporte un risque de perte en capital partielle ou totale.
+                <strong>Disclaimer NPC.</strong> Ne constitue ni conseil en investissement, ni recommandation personnalisée, ni sollicitation. L'auteur peut détenir une position sur la valeur. Performances passées non indicatives. Investir comporte un risque de perte en capital partielle ou totale. La section <em>Synthèse IA</em> est générée par intelligence artificielle à partir de données publiques. Aucune validation humaine n'est garantie. Vérifiez toutes les informations aux sources originales.
             </div>
             {% if market.errors %}
             <div style="margin-top:8px; color: var(--neutral); font-size: 11px;">

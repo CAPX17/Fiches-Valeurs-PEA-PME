@@ -155,29 +155,49 @@ perspectives:
       - Consensus à 1,65 € (Boursorama) — risque binaire intégré
 
 # -----------------------------------------------------------------------------
-# Avis personnel (note explicitement citée dans la source : 7/10)
+# Synthèse IA (analyse augmentée — pas un avis humain)
+# Score : indicateur synthétique 0-10 issu d'une lecture multi-critères
+# Force du signal : FORT / MODÉRÉ / FAIBLE — calibrage qualitatif global
 # -----------------------------------------------------------------------------
-avis:
-  note: 7
-  intensite: MODÉRÉ   # FORT / MODÉRÉ / FAIBLE
-  texte: |
-    Plateforme exclusive Pasteur = moat structurel. Sanofi 20 M€ pour
-    ~11 % de la capitalisation = validation Big Pharma significative.
-    SENS-601 (GJB2) ouvre un marché 30-40× plus large que celui d'OTOF.
-    Cours en zone basse, catalyseur imminent (CTA).
+synthese_ia:
+  score: 7
+  force_signal: MODÉRÉ   # FORT / MODÉRÉ / FAIBLE
+  date_generation: 2026-04-29
+  texte_synthese: |
+    L'accord-cadre exclusif avec l'Institut Pasteur et l'Institut de
+    l'Audition (Pr Christine Petit), prolongé jusqu'au 31/12/2028,
+    constitue un actif structurel : Sensorion détient une option de
+    licence exclusive sur l'ensemble des candidats issus de la
+    collaboration. SENS-501 et SENS-601 sont les deux premiers
+    programmes générés par cette plateforme.
 
-    L'élément le plus structurant reste l'accord-cadre exclusif avec
-    l'Institut Pasteur / Institut de l'Audition prolongé jusqu'en 2028.
-    Sensorion s'est assuré que toutes les découvertes du Pr Christine
-    Petit en thérapie génique auditive lui reviennent en licence
-    exclusive — barrière à l'entrée que les concurrents (Regeneron,
-    Lilly) ne peuvent pas reproduire. SENS-501 et SENS-601 sont les
-    deux premiers produits de cette plateforme, un troisième programme
-    avant 2028 est probable.
+    Le tour de financement de 60 M€ bouclé en janvier 2026, dont
+    20 M€ apportés par Sanofi (~11 % de la capitalisation), inscrit
+    une position institutionnelle d'un Big Pharma au capital. La
+    trésorerie 47,5 M€ au 31/12/2025, complétée par cette levée,
+    sécurise un runway jusqu'à fin S1 2027.
 
-    Position à dimensionner avec prudence : risque binaire clinique,
-    n faibles, levée nécessaire post-S1 2027, concurrence Big Pharma.
-    Ne constitue ni conseil en investissement ni recommandation.
+    SENS-601 cible le gène GJB2, responsable de 30 à 40 % des
+    surdités génétiques (vs ~1 % pour OTOF/SENS-501). La soumission
+    CTA Europe est attendue au S1 2026, suivie d'une IND USA fin
+    2026. Le risque clinique reste binaire (Phase 1/2, effectifs
+    faibles), avec une concurrence Big Pharma significative
+    (Regeneron via Akouos, Lilly via Decibel) et une nouvelle levée
+    nécessaire post-S1 2027.
+
+  facteurs_positifs:
+    - Accord exclusif Institut Pasteur prolongé jusqu'en 2028 (moat structurel)
+    - Sanofi présent au capital pour 20 M€ (~11 %) — validation Big Pharma
+    - SENS-601/GJB2 adresse 30-40 % du marché des surdités génétiques
+    - Données 6M Cohorte 2 SENS-501 confirmées (23/03/2026)
+    - Runway sécurisé jusqu'à fin S1 2027 (trésorerie 47,5 M€)
+
+  facteurs_negatifs:
+    - Stade clinique précoce (Phase 1/2) — risque binaire élevé
+    - ~515 M actions post-levée janvier 2026 — dilution déjà significative
+    - Nouvelle levée nécessaire après S1 2027
+    - Concurrence Big Pharma (Regeneron, Lilly) avec moyens supérieurs
+    - Volatilité structurelle typique d'une biotech micro-cap
 
 # -----------------------------------------------------------------------------
 # Sources
