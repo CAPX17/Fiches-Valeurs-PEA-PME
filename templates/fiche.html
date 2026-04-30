@@ -83,7 +83,11 @@
                     <span class="pill mono">{{ meta.ticker }}</span>
                     <span>{{ meta.marche or '' }}</span>
                 </div>
-                <div class="updated">Dernière mise à jour : {{ footer.generated_at }} (Europe/Paris)</div>
+                <div class="updated">
+                    <span id="updated-relative" data-iso="{{ footer.generated_at_iso }}">Données mises à jour</span>
+                    · {{ footer.generated_at }} (Europe/Paris)
+                </div>
+                <div class="next-updates">Prochaines mises à jour : 10h, 13h, 16h, 18h (jours ouvrés)</div>
             </div>
             <div class="spark-wrap">
                 <span class="label">30 jours</span>
@@ -408,6 +412,25 @@
 const CHART_DATA = {{ charts | tojson }};
 
 document.addEventListener('DOMContentLoaded', () => {
+    const rel = document.getElementById('updated-relative');
+    if (rel && rel.dataset.iso) {
+        const generated = new Date(rel.dataset.iso);
+        if (!isNaN(generated.getTime())) {
+            const diffMin = Math.max(0, Math.floor((Date.now() - generated.getTime()) / 60000));
+            let label;
+            if (diffMin < 1)         label = 'Données mises à jour à l’instant';
+            else if (diffMin < 60)   label = `Données mises à jour il y a ${diffMin} minute${diffMin > 1 ? 's' : ''}`;
+            else if (diffMin < 1440) {
+                const h = Math.floor(diffMin / 60);
+                label = `Données mises à jour il y a ${h} heure${h > 1 ? 's' : ''}`;
+            } else {
+                const d = Math.floor(diffMin / 1440);
+                label = `Données mises à jour il y a ${d} jour${d > 1 ? 's' : ''}`;
+            }
+            rel.textContent = label;
+        }
+    }
+
     const DISCLAIMER_KEY = 'disclaimer-dismissed-v1';
     const banner = document.getElementById('disclaimer-top');
     const closeBtn = document.getElementById('disclaimer-top-close');

@@ -201,7 +201,9 @@ def build_context(
     else:
         date_gen_str = None
 
-    generated_at = datetime.now(PARIS_TZ).strftime("%d/%m/%Y %H:%M")
+    now_paris = datetime.now(PARIS_TZ)
+    generated_at = now_paris.strftime("%d/%m/%Y %H:%M")
+    generated_at_iso = now_paris.isoformat(timespec="seconds")
 
     return {
         "meta": {
@@ -257,7 +259,7 @@ def build_context(
             "date_generation": date_gen_str,
         },
         "sources": editorial.get("sources", []) or [],
-        "footer": {"generated_at": generated_at},
+        "footer": {"generated_at": generated_at, "generated_at_iso": generated_at_iso},
         "charts": _build_charts(market),
     }
 

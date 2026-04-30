@@ -311,6 +311,12 @@ table { border-collapse: collapse; width: 100%; }
     color: var(--text-3);
     font-size: 12px;
 }
+.page-header .title .next-updates {
+    margin-top: 4px;
+    color: var(--text-3);
+    font-size: 11px;
+    opacity: 0.75;
+}
 
 .spark-wrap {
     display: flex;
