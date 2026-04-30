@@ -219,3 +219,6 @@ __marimo__/
 
 # Project local cache
 .cache/
+
+# macOS
+.DS_Store
