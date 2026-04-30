@@ -16,9 +16,13 @@ on:
       - 'requirements.txt'
       - '.github/workflows/generate.yml'
   schedule:
-    # Tous les jours à 18:00 UTC (~20:00 Paris été / 19:00 hiver),
-    # après clôture Euronext (17:30 Paris).
-    - cron: '0 18 * * *'
+    # 4 runs par jour ouvré (lundi-vendredi), calibré heure d'été (UTC+2) :
+    #   08:00 UTC → 10:00 Paris (1h après ouverture Euronext 9h)
+    #   11:00 UTC → 13:00 Paris (mi-séance)
+    #   14:00 UTC → 16:00 Paris (avant clôture 17:30)
+    #   16:00 UTC → 18:00 Paris (~30min post-clôture, valeurs consolidées)
+    # En heure d'hiver (UTC+1), les runs sont décalés à 9h/12h/15h/17h Paris.
+    - cron: '0 8,11,14,16 * * 1-5'
 
 permissions:
   contents: write
