@@ -1,0 +1,66 @@
+name: Generate fiche
+
+# Régénère docs/index.html à partir du YAML éditorial + données yfinance.
+# Le commit auto inclut '[skip ci]' pour éviter une boucle de déclenchement.
+
+on:
+  workflow_dispatch:        # bouton "Run workflow" dans l'onglet Actions
+  push:
+    branches: [main]
+    paths:
+      - 'generate.py'
+      - 'src/**'
+      - 'templates/**'
+      - 'static/**'
+      - 'content/**'
+      - 'requirements.txt'
+      - '.github/workflows/generate.yml'
+  schedule:
+    # Tous les jours à 18:00 UTC (~20:00 Paris été / 19:00 hiver),
+    # après clôture Euronext (17:30 Paris).
+    - cron: '0 18 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: generate-fiche
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies (mandatory)
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt || pip install yfinance pandas Jinja2 PyYAML
+          pip install 'pandas-ta>=0.3' || echo "pandas-ta non disponible, fallback pandas pur utilisé"
+
+      - name: Generate fiche
+        run: python generate.py
+
+      - name: Commit & push if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [[ -n "$(git status --porcelain docs/)" ]]; then
+            git add docs/
+            git commit -m "chore(auto): regen docs/ from yfinance [skip ci]"
+            git push origin HEAD:main
+            echo "Commit auto poussé: $(git rev-parse HEAD)"
+          else
+            echo "Aucun changement dans docs/"
+          fi
