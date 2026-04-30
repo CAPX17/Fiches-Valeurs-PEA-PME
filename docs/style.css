@@ -508,6 +508,7 @@ table { border-collapse: collapse; width: 100%; }
     padding: 10px 8px;
     text-align: left;
     border-bottom: 1px solid var(--border);
+    white-space: nowrap;
 }
 .fibo th {
     color: var(--text-3);
