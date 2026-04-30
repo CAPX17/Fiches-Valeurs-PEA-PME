@@ -52,6 +52,15 @@
 /* ------------------------------------------------------------ */
 *, *::before, *::after { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
+
+/* Scrollbars — global, dark theme */
+html { scrollbar-width: thin; scrollbar-color: #2d3a6b #0b1437; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #0b1437; }
+::-webkit-scrollbar-thumb { background: #2d3a6b; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #4318ff; }
+::-webkit-scrollbar-corner { background: #0b1437; }
+
 body {
     font-family: var(--font-sans);
     font-size: 14px;
@@ -135,7 +144,6 @@ table { border-collapse: collapse; width: 100%; }
     position: sticky;
     top: 0;
     height: 100vh;
-    overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 32px;
