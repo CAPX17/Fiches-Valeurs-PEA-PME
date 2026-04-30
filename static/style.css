@@ -87,27 +87,22 @@ table { border-collapse: collapse; width: 100%; }
     position: sticky;
     top: 0;
     z-index: 100;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto;
     align-items: center;
-    justify-content: space-between;
-    gap: 16px;
     background: #111c44;
     border-bottom: 1px solid #f6ad55;
-    color: #a3aed0;
-    font-size: 12px;
-    font-weight: 400;
     padding: 8px 24px;
 }
 .disclaimer-top-text {
-    flex: 1;
-    min-width: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    text-align: center;
+    color: #a3aed0;
+    font-size: 12px;
+    font-weight: 400;
 }
 .disclaimer-top-close {
-    flex-shrink: 0;
-    background: none;
+    justify-self: end;
+    background: transparent;
     border: none;
     color: inherit;
     font-size: 16px;
