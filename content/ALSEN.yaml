@@ -164,38 +164,39 @@ synthese_ia:
   force_signal: MODÉRÉ   # FORT / MODÉRÉ / FAIBLE
   date_generation: 2026-04-30
   texte_synthese: |
-    Le cours affiche un rebond de +10,23 % le 30 avril 2026 (0,4040 €,
-    volume 2,2 M), sans communiqué officiel identifié comme déclencheur.
-    La position dans le range 52 semaines reste basse (24,5 %, plancher
-    à 0,2730 €). Le RSI(14) à 42 est en zone neutre ; le MACD à −0,0152
-    demeure négatif. Le cours évolue 3,3 % sous la MA50 (0,4177 €) et
-    14,7 % au-dessus de la MA200 (0,3523 €).
+    Le cours se maintient à 0,4040 € au 30 avril 2026 (rebond intraday
+    +10,23 %, volume 2,2 M), en position basse dans le range 52 semaines
+    (24,5 %, plancher à 0,2730 €). Le RSI(14) à 42,0 est en zone neutre ;
+    le MACD à −0,0152 reste négatif. Le cours évolue 3,3 % sous la MA50
+    (0,4177 €) et 14,7 % au-dessus de la MA200 (0,3523 €). La variation
+    7 jours demeure négative (−3,93 %) malgré le rebond intraday.
 
-    Pas d'annonce clinique ou réglementaire notable depuis la dernière
-    revue. Les données fondamentales sont inchangées : trésorerie 47,5 M€
-    au 31/12/2025, runway affiché jusqu'à fin S1 2027, tour de 60 M€
+    Pas d'annonce clinique ou réglementaire notable cette semaine. Les
+    données fondamentales sont inchangées : trésorerie 47,5 M€ au
+    31/12/2025, runway affiché jusqu'à fin S1 2027, financement 60 M€
     (dont 20 M€ Sanofi) bouclé en janvier 2026. Les données 6 mois
     Cohorte 2 SENS-501 (23/03/2026) restent le dernier catalyseur
-    clinique documenté.
+    clinique documenté. Stabilité de la situation fondamentale depuis
+    la dernière revue.
 
-    L'AG mixte du 11 mai 2026 (Paris) est le prochain événement de
-    calendrier, avec une mise à jour stratégique attendue. La soumission
-    CTA SENS-601 (GJB2, ~30-40 % des surdités génétiques) est confirmée
-    au S1 2026 ; des données précliniques SENS-601 seront présentées en
-    poster à l'ASGCT (Boston, mai 2026). Le risque binaire lié au stade
-    clinique précoce et la nécessité d'une nouvelle levée post-S1 2027
-    restent les principaux facteurs limitants.
+    L'AG mixte du 11 mai 2026 (Paris, Square Louvois, 14h00 CET) est
+    dans 11 jours — une mise à jour stratégique est attendue. La
+    soumission CTA SENS-601 (GJB2, ~30-40 % des surdités génétiques)
+    reste confirmée au S1 2026 ; un poster préclinique SENS-601 est
+    annoncé à l'ASGCT (Boston, mai 2026). Le risque binaire lié au stade
+    clinique précoce et la nécessité d'une levée post-S1 2027 demeurent
+    les principaux facteurs limitants.
 
   facteurs_positifs:
-    - Rebond intraday +10,23 % le 30/04/2026 (volume 2,2 M, sans annonce identifiée)
-    - AG mixte 11 mai 2026 — mise à jour stratégique imminente
+    - AG mixte du 11 mai 2026 (dans 11 jours) — mise à jour stratégique imminente
     - CTA SENS-601 (GJB2, 30-40 % des surdités génétiques) confirmé S1 2026
-    - Poster ASGCT SENS-601 (Boston, mai 2026) — visibilité scientifique
+    - Poster ASGCT SENS-601 (Boston, mai 2026) — visibilité scientifique préclinique
     - Runway trésorerie sécurisé jusqu'à fin S1 2027 (47,5 M€ au 31/12/2025)
+    - Sanofi 20 M€ au capital — validation institutionnelle Big Pharma
 
   facteurs_negatifs:
-    - MACD −0,0152 (zone négative) ; cours 3,3 % sous la MA50
-    - Variation 7 jours : −3,93 % — sous-performance à court terme
+    - "MACD −0,0152 (zone négative) ; cours 3,3 % sous la MA50 (0,4177 €)"
+    - "Variation 7 jours : −3,93 % — sous-performance à court terme"
     - Stade clinique précoce (Phase 1/2) — risque binaire élevé
     - ~515 M actions post-levée janvier 2026 — dilution structurelle significative
     - Nouvelle levée nécessaire après S1 2027
