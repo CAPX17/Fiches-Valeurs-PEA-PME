@@ -770,21 +770,23 @@ table { border-collapse: collapse; width: 100%; }
 }
 .page-footer .sources strong { color: var(--text-2); }
 
-/* Badge auto */
-.auto-badge {
-    display: inline-block;
-    margin-left: 6px;
-    padding: 1px 6px;
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.8px;
-    border-radius: 4px;
-    background: rgba(67, 24, 255, 0.15);
-    color: #9f7aea;
-    border: 1px solid rgba(67, 24, 255, 0.3);
-    vertical-align: middle;
-    text-transform: uppercase;
+/* Marqueur auto : pastille discrète en haut-droite des cards */
+.auto-mark {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.4;
+    cursor: help;
+    transition: opacity 0.2s ease;
 }
+.auto-mark:hover { opacity: 0.85; }
+
+/* Conteneurs qui hébergent la pastille doivent être positionnés */
+.kpi-card, .kpi-card-sec, .card { position: relative; }
 
 /* ------------------------------------------------------------ */
 /* Mobile burger                                                 */
