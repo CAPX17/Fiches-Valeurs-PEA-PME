@@ -1,5 +1,7 @@
 yfinance>=0.2.40
 pandas>=2.0
-pandas-ta>=0.3.14b
 Jinja2>=3.1
 PyYAML>=6.0
+
+# Optionnel : indicateurs techniques. Fallback pandas pur si absent.
+# pandas-ta>=0.3.14b
