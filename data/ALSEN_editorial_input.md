@@ -1,6 +1,6 @@
 # Données pour mise à jour éditoriale — Sensorion (ALSEN.PA)
 
-**Date de génération du dump** : 2026-05-01T23:07:28+00:00
+**Date de génération du dump** : 2026-05-01T23:20:28+00:00
 **Source** : content/ALSEN.yaml (état actuel)
 
 Ce fichier est l'input de la routine Claude ÉDITORIALE hebdomadaire.
