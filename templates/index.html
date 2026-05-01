@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fiches-Valeurs PEA-PME — Index</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%234318ff'/%3E%3Ctext x='50' y='68' font-family='Inter,sans-serif' font-size='60' font-weight='700' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-index">
+
+<header class="disclaimer-top" id="disclaimer-top">
+    <span class="disclaimer-top-text">Note personnelle d'analyse — ni conseil, ni recommandation, ni sollicitation. Risque de perte en capital. Voir disclaimer complet en bas de page.</span>
+    <button class="disclaimer-top-close" id="disclaimer-top-close" type="button" aria-label="Fermer le bandeau">×</button>
+</header>
+
+<main class="index-main">
+    <header class="index-header">
+        <div class="index-logo">
+            <div class="logo-mark">F</div>
+            <div>
+                <h1>Fiches-Valeurs</h1>
+                <div class="index-subtitle">Dashboard d'analyse multi-actions</div>
+            </div>
+        </div>
+        <div class="index-meta">
+            <div id="updated-relative" data-iso="{{ footer.generated_at_iso }}">Données mises à jour</div>
+            <div class="updated">{{ footer.generated_at }} (Europe/Paris)</div>
+            <div class="next-updates">Prochaines mises à jour : 10h, 13h, 16h, 18h (jours ouvrés)</div>
+        </div>
+    </header>
+
+    {% macro render_table(fiches) -%}
+    {% if fiches %}
+    <table class="index-table">
+        <thead>
+            <tr>
+                <th data-sort-key="nom" data-sort-type="text">Nom</th>
+                <th data-sort-key="price" data-sort-type="num">Cours</th>
+                <th data-sort-key="change" data-sort-type="num">Variation</th>
+                <th data-sort-key="rsi" data-sort-type="num">RSI</th>
+                <th data-sort-key="score" data-sort-type="num" class="sort-active sort-desc">Score IA</th>
+                <th data-sort-key="updated" data-sort-type="text">Dernière maj</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for f in fiches %}
+            <tr class="index-row" data-href="{{ f.url }}">
+                <td class="cell-name">
+                    <div class="name-line">{{ f.nom }}</div>
+                    <div class="name-ticker mono">{{ f.ticker }}</div>
+                </td>
+                <td class="cell-price mono" data-sort-value="{{ f.price_raw }}">{{ f.price }}</td>
+                <td class="cell-change mono {{ f.change_pct_class }}" data-sort-value="{{ f.change_pct_raw }}">{{ f.change_pct }}</td>
+                <td class="cell-rsi mono" data-sort-value="{{ f.rsi_14_raw }}">{{ f.rsi_14 }}</td>
+                <td class="cell-score" data-sort-value="{{ f.score_ia_raw }}">
+                    <span class="score-pill score-{{ f.force_signal_class }}">{{ f.score_ia }}/10</span>
+                </td>
+                <td class="cell-updated mono" data-sort-value="{{ f.generated_at_iso }}">{{ f.generated_at }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="index-empty">Aucune fiche pour l'instant.</p>
+    {% endif %}
+    {%- endmacro %}
+
+    <section class="index-section">
+        <h2><span class="acc"></span>PEA-PME <span class="count">({{ fiches_pea | length }})</span></h2>
+        {{ render_table(fiches_pea) }}
+    </section>
+
+    <section class="index-section">
+        <h2><span class="acc"></span>Hors PEA-PME <span class="count">({{ fiches_hors_pea | length }})</span></h2>
+        {{ render_table(fiches_hors_pea) }}
+    </section>
+
+    <footer class="page-footer">
+        <div>Généré le {{ footer.generated_at }} (Europe/Paris) · {{ total }} fiche{{ '' if total == 1 else 's' }} référencée{{ '' if total == 1 else 's' }}</div>
+        <div style="margin-top:12px">
+            <strong>Disclaimer NPC.</strong> Ne constitue ni conseil en investissement, ni recommandation personnalisée, ni sollicitation. L'auteur peut détenir une position sur les valeurs listées. Performances passées non indicatives. Investir comporte un risque de perte en capital partielle ou totale. La section <em>Synthèse IA</em> de chaque fiche est générée par intelligence artificielle à partir de données publiques. Aucune validation humaine n'est garantie. Vérifiez toutes les informations aux sources originales.
+        </div>
+    </footer>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Bandeau disclaimer dismissable
+    const DISCLAIMER_KEY = 'disclaimer-dismissed-v1';
+    const banner = document.getElementById('disclaimer-top');
+    const closeBtn = document.getElementById('disclaimer-top-close');
+    if (banner && closeBtn) {
+        try {
+            if (localStorage.getItem(DISCLAIMER_KEY) === 'true') banner.classList.add('is-hidden');
+        } catch (_) {}
+        closeBtn.addEventListener('click', () => {
+            banner.classList.add('is-hidden');
+            try { localStorage.setItem(DISCLAIMER_KEY, 'true'); } catch (_) {}
+        });
+    }
+
+    // Horodatage relatif
+    const rel = document.getElementById('updated-relative');
+    if (rel && rel.dataset.iso) {
+        const generated = new Date(rel.dataset.iso);
+        if (!isNaN(generated.getTime())) {
+            const diffMin = Math.max(0, Math.floor((Date.now() - generated.getTime()) / 60000));
+            let label;
+            if (diffMin < 1)         label = 'Données mises à jour à l’instant';
+            else if (diffMin < 60)   label = `Données mises à jour il y a ${diffMin} minute${diffMin > 1 ? 's' : ''}`;
+            else if (diffMin < 1440) {
+                const h = Math.floor(diffMin / 60);
+                label = `Données mises à jour il y a ${h} heure${h > 1 ? 's' : ''}`;
+            } else {
+                const d = Math.floor(diffMin / 1440);
+                label = `Données mises à jour il y a ${d} jour${d > 1 ? 's' : ''}`;
+            }
+            rel.textContent = label;
+        }
+    }
+
+    // Lignes cliquables
+    document.querySelectorAll('.index-row[data-href]').forEach(row => {
+        row.addEventListener('click', () => {
+            window.location.href = row.dataset.href;
+        });
+    });
+
+    // Tri triable côté client
+    document.querySelectorAll('table.index-table').forEach(table => {
+        const tbody = table.querySelector('tbody');
+        if (!tbody) return;
+        const headers = table.querySelectorAll('thead th[data-sort-key]');
+        headers.forEach((th, idx) => {
+            th.addEventListener('click', () => {
+                const isActive = th.classList.contains('sort-active');
+                const wasDesc = th.classList.contains('sort-desc');
+                headers.forEach(h => h.classList.remove('sort-active', 'sort-asc', 'sort-desc'));
+                th.classList.add('sort-active');
+                const desc = isActive ? !wasDesc : true;
+                th.classList.add(desc ? 'sort-desc' : 'sort-asc');
+                const type = th.dataset.sortType;
+                const rows = Array.from(tbody.querySelectorAll('tr'));
+                rows.sort((a, b) => {
+                    const av = a.children[idx].dataset.sortValue ?? a.children[idx].textContent.trim();
+                    const bv = b.children[idx].dataset.sortValue ?? b.children[idx].textContent.trim();
+                    let cmp;
+                    if (type === 'num') {
+                        const an = parseFloat(av), bn = parseFloat(bv);
+                        const aIsNaN = isNaN(an), bIsNaN = isNaN(bn);
+                        if (aIsNaN && bIsNaN) cmp = 0;
+                        else if (aIsNaN) cmp = 1;
+                        else if (bIsNaN) cmp = -1;
+                        else cmp = an - bn;
+                    } else {
+                        cmp = av.localeCompare(bv, 'fr', { sensitivity: 'base' });
+                    }
+                    return desc ? -cmp : cmp;
+                });
+                rows.forEach(r => tbody.appendChild(r));
+            });
+        });
+    });
+});
+</script>
+
+</body>
+</html>

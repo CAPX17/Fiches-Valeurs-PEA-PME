@@ -25,7 +25,7 @@ sys.path.insert(0, str(ROOT))
 
 from src.fetcher import MarketData  # noqa: E402
 from src.indicators import Indicators, _compute_fibo, _range_position  # noqa: E402
-from src.renderer import build_context, render  # noqa: E402
+from src.renderer import build_context, build_index_summary, render, render_index  # noqa: E402
 
 
 def synth_history(low: float, high: float, current: float, days: int) -> pd.DataFrame:
@@ -96,15 +96,24 @@ def main() -> int:
 
     editorial = yaml.safe_load((ROOT / "content" / "ALSEN.yaml").read_text(encoding="utf-8"))
 
+    base = editorial.get("ticker", fixture["ticker"]).split(".")[0]
+
     context = build_context(editorial, md, indic)
     html = render(context, ROOT / "templates")
 
-    out_html = ROOT / "docs" / "index.html"
-    out_html.parent.mkdir(exist_ok=True)
-    out_html.write_text(html, encoding="utf-8")
-    shutil.copyfile(ROOT / "static" / "style.css", ROOT / "docs" / "style.css")
+    docs = ROOT / "docs"
+    docs.mkdir(exist_ok=True)
+    fiche_html = docs / f"{base}.html"
+    fiche_html.write_text(html, encoding="utf-8")
 
-    print(f"OK fixture render → {out_html} ({out_html.stat().st_size // 1024} KB)")
+    summary = build_index_summary(editorial, md, indic, base=base)
+    index_html_path = docs / "index.html"
+    index_html_path.write_text(render_index([summary], ROOT / "templates"), encoding="utf-8")
+
+    shutil.copyfile(ROOT / "static" / "style.css", docs / "style.css")
+
+    print(f"OK fixture render → {fiche_html} ({fiche_html.stat().st_size // 1024} KB)")
+    print(f"OK index render   → {index_html_path} ({index_html_path.stat().st_size // 1024} KB)")
     return 0
 
 

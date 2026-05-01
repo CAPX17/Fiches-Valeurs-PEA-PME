@@ -273,3 +273,90 @@ def render(context: dict[str, Any], template_dir: Path, template_name: str = "fi
     )
     tpl = env.get_template(template_name)
     return tpl.render(**context)
+
+
+def build_index_summary(
+    editorial: dict[str, Any],
+    market: MarketData,
+    indic: Indicators,
+    *,
+    base: str,
+) -> dict[str, Any]:
+    """Résumé d'une fiche pour la page index (1 ligne par valeur)."""
+    currency_symbol = "€" if (market.currency in (None, "EUR")) else (market.currency or "€")
+    synthese = editorial.get("synthese_ia") or editorial.get("avis") or {}
+    score = synthese.get("score") if synthese.get("score") is not None else synthese.get("note")
+    force_signal_raw = (
+        synthese.get("force_signal") or synthese.get("intensite") or ""
+    ).upper()
+    force_signal_class = {
+        "FORT": "fort",
+        "MODÉRÉ": "modere",
+        "MODERE": "modere",
+        "FAIBLE": "faible",
+    }.get(force_signal_raw, "modere")
+
+    cadre = (editorial.get("cadre_fiscal") or "").strip()
+    if not cadre:
+        cadre = "PEA-PME" if editorial.get("pea_pme_eligible") else "Hors PEA-PME"
+
+    now_paris = datetime.now(PARIS_TZ)
+
+    return {
+        "ticker": editorial.get("ticker", market.ticker),
+        "base": base,
+        "url": f"{base}.html",
+        "nom": editorial.get("nom") or editorial.get("ticker") or base,
+        "cadre_fiscal": cadre,
+        "price": _fmt_price(market.price, currency_symbol),
+        "price_raw": market.price if market.price is not None else float("nan"),
+        "change_pct": _fmt_pct(market.change_pct, signed=True, decimals=2),
+        "change_pct_class": _change_class(market.change_pct),
+        "change_pct_raw": market.change_pct if market.change_pct is not None else float("nan"),
+        "rsi_14": _fmt_unsigned(indic.rsi_14, decimals=1),
+        "rsi_14_raw": indic.rsi_14 if indic.rsi_14 is not None else float("nan"),
+        "score_ia": score if score is not None else NA,
+        "score_ia_raw": score if isinstance(score, (int, float)) else float("-inf"),
+        "force_signal_label": force_signal_raw or "—",
+        "force_signal_class": force_signal_class,
+        "generated_at": now_paris.strftime("%d/%m/%Y %H:%M"),
+        "generated_at_iso": now_paris.isoformat(timespec="seconds"),
+    }
+
+
+def render_index(
+    fiches: list[dict[str, Any]],
+    template_dir: Path,
+    template_name: str = "index.html",
+) -> str:
+    """Rend la page d'accueil avec les fiches groupées par cadre fiscal."""
+    pea = sorted(
+        [f for f in fiches if f["cadre_fiscal"] == "PEA-PME"],
+        key=lambda f: f["score_ia_raw"],
+        reverse=True,
+    )
+    hors_pea = sorted(
+        [f for f in fiches if f["cadre_fiscal"] != "PEA-PME"],
+        key=lambda f: f["score_ia_raw"],
+        reverse=True,
+    )
+
+    now_paris = datetime.now(PARIS_TZ)
+    context = {
+        "fiches_pea": pea,
+        "fiches_hors_pea": hors_pea,
+        "total": len(fiches),
+        "footer": {
+            "generated_at": now_paris.strftime("%d/%m/%Y %H:%M"),
+            "generated_at_iso": now_paris.isoformat(timespec="seconds"),
+        },
+    }
+
+    env = Environment(
+        loader=FileSystemLoader(str(template_dir)),
+        autoescape=select_autoescape(["html"]),
+        trim_blocks=True,
+        lstrip_blocks=True,
+    )
+    tpl = env.get_template(template_name)
+    return tpl.render(**context)
