@@ -1,61 +1,17 @@
-# Données pour synthèse IA — Sensorion (ALSEN.PA)
+# Données pour mise à jour éditoriale — Sensorion (ALSEN.PA)
 
 **Date de génération du dump** : 2026-05-01T19:28:40+00:00
-**Source** : yfinance + content/ALSEN.yaml
+**Source** : content/ALSEN.yaml (état actuel)
+
+Ce fichier est l'input de la routine Claude ÉDITORIALE hebdomadaire.
+Il reflète l'état actuel des sections éditoriales et rappelle les
+garde-fous issus de l'audit du 01/05/2026.
 
 ---
 
-## 1. Données de marché (yfinance, dernier cours connu)
+## État actuel des sections éditoriales
 
-- Cours : 0,4040 EUR
-- Variation jour : +10,23 %
-- Volume jour : 2,2 M
-- Capitalisation : 207,9 MEUR
-- Nombre d'actions : 514,6 M
-- Plus-haut 52 semaines : 0,8080 EUR
-- Plus-bas 52 semaines : 0,2730 EUR
-- Position dans range 52s : 24,5 %
-
-## 2. Indicateurs techniques
-
-- RSI(14) : 51,4 (zone neutre)
-- MACD : -0,0123 (signal haussier)
-- MA50 : 0,4194 EUR
-- MA200 : 0,3527 EUR
-- Cours vs MA50 : -3,67 %
-- Cours vs MA200 : +14,54 %
-
-## 3. Niveaux Fibonacci (range 52s)
-
-| Niveau | Prix | Δ vs cours | Statut |
-|---|---|---|---|
-| 0,0 % | 0,2730 EUR | -32,43 % | Support |
-| 23,6 % | 0,3993 EUR | -1,17 % | Cours actuel |
-| 38,2 % | 0,4774 EUR | +18,16 % | Résistance |
-| 50,0 % | 0,5405 EUR | +33,79 % | Résistance |
-| 61,8 % | 0,6036 EUR | +49,41 % | Résistance |
-| 100,0 % | 0,8080 EUR | +100,00 % | Résistance |
-
-## 4. Variations historiques
-
-- Variation 1 jour : +10,23 %
-- Variation 7 jours : +5,35 %
-- Variation 30 jours : +14,12 %
-- Variation 90 jours : +7,73 %
-- Variation 1 an : +1,00 %
-
-## 5. Métadonnées société (depuis YAML éditorial)
-
-- Nom : Sensorion
-- ISIN : FR0012596468
-- Marché : Euronext Growth Paris
-- Secteur : Biotechnologie
-- PEA-PME : éligible
-- Liens IR : https://www.sensorion.com/investors/
-
-## 6. Contexte éditorial actuel (depuis YAML éditorial)
-
-### Alertes & catalyseurs documentés
+### Alertes (état actuel)
 
 **[MOAT] Plateforme Institut Pasteur — licences exclusives jusqu'en 2028**
 
@@ -139,7 +95,7 @@ post-S1 2027. Volatilité structurelle élevée typique d'une biotech
 micro-cap.
 
 
-### Pipeline
+### Pipeline (état actuel)
 
 | Programme | Indication | Stade | Prochaine étape |
 |---|---|---|---|
@@ -148,7 +104,7 @@ micro-cap.
 | SENS-40 (Arazasétron) | Surdités sensorineurales (SSNHL) | Historique Phase 2b | Développement repriorisé post-pivot gène-thérapie · statut à reconfirmer |
 | Programme 3+ (futur) | Autre surdité génétique — TBD | Recherche | Émergence avant 2028 (accord Pasteur) |
 
-### Perspectives
+### Perspectives (état actuel)
 
 **Court terme** (1-8 semaines)
 - AG mixte du 11 mai 2026 (Paris, Square Louvois, 14h00 CET) — mise à jour stratégie
@@ -169,43 +125,29 @@ micro-cap.
 - Partenariat ou deal Big Pharma post-données pivots
 - Plateforme Pasteur — émergence d'un 3ᵉ programme avant 2028
 
-## 7. Synthèse IA précédente (pour comparaison)
+## Sources actuellement référencées
 
-- Score précédent : 7
-- Force du signal précédente : MODÉRÉ
-- Date génération précédente : 2026-04-30
-- Texte de synthèse précédent :
-  > Le cours se maintient à 0,4040 € au 30 avril 2026 (rebond intraday
-  > +10,23 %, volume 2,2 M), en position basse dans le range 52 semaines
-  > (24,5 %, plancher à 0,2730 €). Le RSI(14) à 42,0 est en zone neutre ;
-  > le MACD à −0,0152 reste négatif. Le cours évolue 3,3 % sous la MA50
-  > (0,4177 €) et 14,7 % au-dessus de la MA200 (0,3523 €). La variation
-  > 7 jours demeure négative (−3,93 %) malgré le rebond intraday.
-  >
-  > Pas d'annonce clinique ou réglementaire notable cette semaine. Les
-  > données fondamentales sont inchangées : trésorerie 47,5 M€ au
-  > 31/12/2025, runway affiché jusqu'à fin S1 2027, financement 60 M€
-  > (dont 20 M€ Sanofi) bouclé en janvier 2026. Les données 6 mois
-  > Cohorte 2 SENS-501 (23/03/2026) restent le dernier catalyseur
-  > clinique documenté. Stabilité de la situation fondamentale depuis
-  > la dernière revue.
-  >
-  > L'AG mixte du 11 mai 2026 (Paris, Square Louvois, 14h00 CET) est
-  > dans 11 jours — une mise à jour stratégique est attendue. La
-  > soumission CTA SENS-601 (GJB2, ~30-40 % des surdités génétiques)
-  > reste confirmée au S1 2026 ; un poster préclinique SENS-601 est
-  > annoncé à l'ASGCT (Boston, mai 2026). Le risque binaire lié au stade
-  > clinique précoce et la nécessité d'une levée post-S1 2027 demeurent
-  > les principaux facteurs limitants.
-- Facteurs positifs précédents :
-  - AG mixte du 11 mai 2026 (dans 11 jours) — mise à jour stratégique imminente
-  - CTA SENS-601 (GJB2, 30-40 % des surdités génétiques) confirmé S1 2026
-  - Poster ASGCT SENS-601 (Boston, mai 2026) — visibilité scientifique préclinique
-  - Runway trésorerie sécurisé jusqu'à fin S1 2027 (47,5 M€ au 31/12/2025)
-  - Sanofi 20 M€ au capital — validation institutionnelle Big Pharma
-- Facteurs négatifs précédents :
-  - MACD −0,0152 (zone négative) ; cours 3,3 % sous la MA50 (0,4177 €)
-  - Variation 7 jours : −3,93 % — sous-performance à court terme
-  - Stade clinique précoce (Phase 1/2) — risque binaire élevé
-  - ~515 M actions post-levée janvier 2026 — dilution structurelle significative
-  - Nouvelle levée nécessaire après S1 2027
+- PRT 1S ALSEN (29/04/2026 17:34)
+- Sensorion FY2025 (18/03/2026) — trésorerie 47,5 M€ · runway fin S1 2027
+- businesswire.com (05/01/2024) — accord Pasteur prolongé 2028
+- businesswire.com (20/04/2026) — AG 11 mai 2026
+- Sensorion (23/03/2026) — SENS-501 données 6M Cohorte 2
+- BusinessWire — Acquisition Akouos par Lilly (oct 2022)
+- BusinessWire — Acquisition Decibel par Regeneron (sept 2023)
+- FDA / Regeneron — AMM accélérée Otarmeni (avril 2026)
+- BusinessWire — Détention Sanofi post-offre 13,9 % (27/01/2026)
+- Audit interne data/ALSEN_audit_2026-05-01.md (01/05/2026)
+
+## Audit de référence (01/05/2026)
+
+Reprise des 3 corrections critiques de l'audit pour rappel à la routine.
+Ces points NE DOIVENT PAS être contredits dans une modification future.
+
+- Concurrence : **Lilly = Akouos** (rachat 2022), **Regeneron = Decibel/Otarmeni**
+  (rachat 2023, AMM FDA accélérée avril 2026). Toute formulation inversée
+  (« Akouos via Regeneron » ou « Decibel via Lilly ») est interdite.
+- Sanofi : **13,9 % du capital post-offre** (PAS « ~11 % »), source
+  BusinessWire 27/01/2026.
+- SENS-40 : programme **historique Phase 2b**, statut à reconfirmer
+  post-pivot gène-thérapie. Aucune relance « SENS-40 multi-indications
+  Phase 2 active » sans communiqué Sensorion 2026 explicite.
