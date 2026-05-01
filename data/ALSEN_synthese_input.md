@@ -1,6 +1,6 @@
 # Données pour synthèse IA — Sensorion (ALSEN.PA)
 
-**Date de génération du dump** : 2026-05-01T08:48:28+00:00
+**Date de génération du dump** : 2026-05-01T08:59:12+00:00
 **Source** : yfinance + content/ALSEN.yaml
 
 ---
@@ -159,7 +159,7 @@ micro-cap.
 **Moyen terme** (3-12 mois)
 - SENS-601 — IND USA d'ici fin 2026
 - SENS-501 — données Cohorte 3 (catalyseur clinique majeur)
-- SENS-40 — résultats Phase 2b SSNHL
+- SENS-40 — clarification statut post-pivot gène-thérapie attendue
 - Trésorerie sécurisée fin S1 2027 — pas de dilution forcée
 - 3ᵉ programme issu de la plateforme Pasteur possible avant 2028
 
