@@ -16,7 +16,7 @@ import yaml
 from src.fetcher import fetch_market_data
 from src.indicators import compute_indicators
 from src.renderer import build_context, render
-from src.synthesis_dump import build_synthesis_dump
+from src.synthesis_dump import build_editorial_dump, build_synthesis_dump
 
 ROOT = Path(__file__).resolve().parent
 CONTENT_DIR = ROOT / "content"
@@ -92,13 +92,17 @@ def main() -> int:
 
     logger.info("Écrit: %s (%d KB) + %s", out_html, out_html.stat().st_size // 1024, css_dst.name)
 
-    # Dump Markdown destiné à la routine Claude hebdo (synthèse IA)
+    # Dumps Markdown destinés aux routines Claude hebdomadaires
     DATA_DIR.mkdir(exist_ok=True)
     symbol = ticker.split(".")[0]
-    dump_path = DATA_DIR / f"{symbol}_synthese_input.md"
-    dump_md = build_synthesis_dump(editorial, market, indic)
-    dump_path.write_text(dump_md, encoding="utf-8")
-    logger.info("Écrit dump synthèse: %s (%d KB)", dump_path, dump_path.stat().st_size // 1024)
+
+    synth_path = DATA_DIR / f"{symbol}_synthese_input.md"
+    synth_path.write_text(build_synthesis_dump(editorial, market, indic), encoding="utf-8")
+    logger.info("Écrit dump synthèse: %s (%d KB)", synth_path, synth_path.stat().st_size // 1024)
+
+    edit_path = DATA_DIR / f"{symbol}_editorial_input.md"
+    edit_path.write_text(build_editorial_dump(editorial), encoding="utf-8")
+    logger.info("Écrit dump éditorial: %s (%d KB)", edit_path, edit_path.stat().st_size // 1024)
 
     return 0
 

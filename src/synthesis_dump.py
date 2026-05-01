@@ -1,9 +1,14 @@
 """Génère un dump Markdown des données factuelles d'une valeur.
 
-Sortie destinée à être consommée par une routine Claude planifiée qui
-génère la section `synthese_ia` du YAML éditorial. Toutes les valeurs
-proviennent du même pipeline que la fiche HTML : yfinance + indicators
-+ YAML éditorial. Aucune extrapolation.
+Deux dumps sont produits :
+- `build_synthesis_dump` → input pour la routine Claude SYNTHÈSE IA
+  (régénère `synthese_ia` du YAML chaque lundi).
+- `build_editorial_dump` → input pour la routine Claude ÉDITORIALE
+  (modifie `alertes`/`pipeline`/`perspectives` chaque lundi, avec
+  auto-audit obligatoire).
+
+Toutes les valeurs proviennent du même pipeline que la fiche HTML :
+yfinance + indicators + YAML éditorial. Aucune extrapolation.
 """
 from __future__ import annotations
 
@@ -308,6 +313,78 @@ def build_synthesis_dump(
         "## 7. Synthèse IA précédente (pour comparaison)",
         "",
         _fmt_synthese_precedente(synthese_prev),
+        "",
+    ]
+    return "\n".join(sections)
+
+
+# ---------------------------------------------------------------------------
+# Dump éditorial — input pour la routine ÉDITORIALE hebdomadaire
+# ---------------------------------------------------------------------------
+
+# Audit de référence figé (01/05/2026). Ces 3 corrections sont des
+# garde-fous : la routine éditoriale ne doit JAMAIS produire une
+# modification qui les contredit. Voir data/ALSEN_audit_2026-05-01.md.
+AUDIT_REFERENCE_RAPPEL = """\
+- Concurrence : **Lilly = Akouos** (rachat 2022), **Regeneron = Decibel/Otarmeni**
+  (rachat 2023, AMM FDA accélérée avril 2026). Toute formulation inversée
+  (« Akouos via Regeneron » ou « Decibel via Lilly ») est interdite.
+- Sanofi : **13,9 % du capital post-offre** (PAS « ~11 % »), source
+  BusinessWire 27/01/2026.
+- SENS-40 : programme **historique Phase 2b**, statut à reconfirmer
+  post-pivot gène-thérapie. Aucune relance « SENS-40 multi-indications
+  Phase 2 active » sans communiqué Sensorion 2026 explicite."""
+
+
+def build_editorial_dump(editorial: dict[str, Any]) -> str:
+    """Produit le Markdown d'input pour la routine ÉDITORIALE hebdomadaire."""
+    nom = editorial.get("nom", "")
+    ticker = editorial.get("ticker", "")
+    sources = editorial.get("sources", []) or []
+
+    now_iso = datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+    if sources:
+        sources_block = "\n".join(f"- {s}" for s in sources)
+    else:
+        sources_block = "_Aucune source référencée._"
+
+    sections = [
+        f"# Données pour mise à jour éditoriale — {nom} ({ticker})",
+        "",
+        f"**Date de génération du dump** : {now_iso}",
+        f"**Source** : content/{ticker.split('.')[0]}.yaml (état actuel)",
+        "",
+        "Ce fichier est l'input de la routine Claude ÉDITORIALE hebdomadaire.",
+        "Il reflète l'état actuel des sections éditoriales et rappelle les",
+        "garde-fous issus de l'audit du 01/05/2026.",
+        "",
+        "---",
+        "",
+        "## État actuel des sections éditoriales",
+        "",
+        "### Alertes (état actuel)",
+        "",
+        _fmt_alertes(editorial.get("alertes", []) or []),
+        "",
+        "### Pipeline (état actuel)",
+        "",
+        _fmt_pipeline(editorial.get("pipeline", []) or []),
+        "",
+        "### Perspectives (état actuel)",
+        "",
+        _fmt_perspectives(editorial.get("perspectives", {}) or {}),
+        "",
+        "## Sources actuellement référencées",
+        "",
+        sources_block,
+        "",
+        "## Audit de référence (01/05/2026)",
+        "",
+        "Reprise des 3 corrections critiques de l'audit pour rappel à la routine.",
+        "Ces points NE DOIVENT PAS être contredits dans une modification future.",
+        "",
+        AUDIT_REFERENCE_RAPPEL,
         "",
     ]
     return "\n".join(sections)
