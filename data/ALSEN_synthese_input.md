@@ -1,6 +1,6 @@
 # Données pour synthèse IA — Sensorion (ALSEN.PA)
 
-**Date de génération du dump** : 2026-04-30T23:03:57+00:00
+**Date de génération du dump** : 2026-05-01T08:48:28+00:00
 **Source** : yfinance + content/ALSEN.yaml
 
 ---
@@ -18,12 +18,12 @@
 
 ## 2. Indicateurs techniques
 
-- RSI(14) : 42,0 (zone neutre)
-- MACD : -0,0152 (signal baissier)
-- MA50 : 0,4177 EUR
-- MA200 : 0,3523 EUR
-- Cours vs MA50 : -3,27 %
-- Cours vs MA200 : +14,66 %
+- RSI(14) : 51,4 (zone neutre)
+- MACD : -0,0123 (signal haussier)
+- MA50 : 0,4194 EUR
+- MA200 : 0,3527 EUR
+- Cours vs MA50 : -3,67 %
+- Cours vs MA200 : +14,54 %
 
 ## 3. Niveaux Fibonacci (range 52s)
 
@@ -39,10 +39,10 @@
 ## 4. Variations historiques
 
 - Variation 1 jour : +10,23 %
-- Variation 7 jours : -3,93 %
-- Variation 30 jours : +3,53 %
-- Variation 90 jours : +6,85 %
-- Variation 1 an : -8,38 %
+- Variation 7 jours : +5,35 %
+- Variation 30 jours : +14,12 %
+- Variation 90 jours : +7,73 %
+- Variation 1 an : +1,00 %
 
 ## 5. Métadonnées société (depuis YAML éditorial)
 
@@ -73,10 +73,10 @@ changement de contrôle non agréé : protection contre OPA hostile.
 **[FINANCE] Sanofi 20 M€ dans le tour de 60 M€ de janvier 2026**
 
 Financement total 60 M€ bouclé en janvier 2026, dont 20 M€ apportés
-par Sanofi en investissement stratégique (~11 % de la capitalisation
-d'environ 190 M€). Position institutionnelle significative d'un Big
-Pharma mondial qui dispose d'équipes d'analyse spécialisées en
-thérapie génique.
+par Sanofi en investissement stratégique (13,9 % du capital
+post-offre, source BusinessWire 27/01/2026). Position
+institutionnelle significative d'un Big Pharma mondial qui dispose
+d'équipes d'analyse spécialisées en thérapie génique.
 
 Lecture : signal de validation scientifique fort, sans pour autant
 constituer une garantie commerciale.
@@ -113,12 +113,26 @@ pression de financement.
 Une nouvelle levée sera nécessaire après S1 2027 pour financer la
 suite du développement clinique.
 
+**[RISQUE] Concurrent approuvé FDA sur OTOF — Otarmeni (Regeneron) avril 2026**
+
+Regeneron a obtenu en avril 2026 la première AMM accélérée de la
+FDA pour Otarmeni (lunsotogene parvec-cwha, ex-DB-OTO), thérapie
+génique ciblant la surdité congénitale OTOF.
+
+SENS-501 (Sensorion) adresse la même indication mais reste en
+Phase 1/2. Le first-mover advantage de Regeneron crée un risque
+commercial significatif : positionnement de marché, accès
+remboursement, recrutement patients pour les essais SENS-501.
+
+Source : communiqué Regeneron / FDA, avril 2026.
+
 **[RISQUE] Stade précoce, risque binaire et concurrence Big Pharma**
 
 Le dossier reste un pari clinique sur des effectifs faibles (Phase
 1/2). La route vers la Phase 3 puis l'AMM est longue (5-8 ans
-minimum) et la concurrence (Regeneron via Akouos, Lilly via Decibel)
-dispose de moyens sans commune mesure.
+minimum) et la concurrence (Lilly via Akouos racheté oct 2022,
+Regeneron via Decibel racheté sept 2023 → Otarmeni AMM FDA avril
+2026) dispose de moyens sans commune mesure.
 
 ~515 M actions post-levée janvier 2026 ; nouvelle levée nécessaire
 post-S1 2027. Volatilité structurelle élevée typique d'une biotech
@@ -131,7 +145,7 @@ micro-cap.
 |---|---|---|---|
 | SENS-501 (OTOF-GT) | Surdité congénitale OTOF (~1 % des cas) | Phase 1/2 | Cohorte 3 (dose haute) · données durabilité |
 | SENS-601 (GJB2-GT) | Surdité congénitale GJB2 (30-40 % des cas) | Préclinique → CTA | CTA Europe S1 2026 · IND USA fin 2026 |
-| SENS-40 | SSNHL · Implant cochléaire · Cisplatine | Phase 2b / 2a (×3) | Données Phase 2b SSNHL |
+| SENS-40 (Arazasétron) | Surdités sensorineurales (SSNHL) | Historique Phase 2b | Développement repriorisé post-pivot gène-thérapie · statut à reconfirmer |
 | Programme 3+ (futur) | Autre surdité génétique — TBD | Recherche | Émergence avant 2028 (accord Pasteur) |
 
 ### Perspectives
@@ -154,7 +168,6 @@ micro-cap.
 - SENS-601 Phase 1 puis Phase 2 GJB2
 - Partenariat ou deal Big Pharma post-données pivots
 - Plateforme Pasteur — émergence d'un 3ᵉ programme avant 2028
-- Consensus à 1,65 € (Boursorama) — risque binaire intégré
 
 ## 7. Synthèse IA précédente (pour comparaison)
 
