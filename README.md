@@ -183,6 +183,38 @@ automatiquement — ils restent volontairement figés pour traçabilité.
 
 ---
 
+## Routines Claude planifiées
+
+Deux routines Claude planifiées tournent chaque lundi matin et écrivent
+directement sur `main`. Elles consomment des dumps Markdown produits à
+chaque build CI dans `data/` et suivent des prompts-recettes versionnés
+dans `prompts/`.
+
+### Routine synthèse (lundi 9h00)
+
+Régénère la section `synthese_ia` de `content/ALSEN.yaml` (score 0-10,
+force du signal, texte d'analyse factuelle neutre, facteurs ± , date).
+Input : `data/ALSEN_synthese_input.md`. Recette : `prompts/synthese_ALSEN.md`.
+
+### Routine éditoriale hebdomadaire avec auto-audit (lundi 9h15)
+
+Une seconde routine Claude planifiée chaque lundi à 9h15 (15 min après
+la routine synthèse) analyse l'actualité et propose des mises à jour
+éditoriales sur `content/ALSEN.yaml`. Avant tout commit, un auto-audit
+strict vérifie chaque modification selon une checklist binaire (sources
+primaires, cohérence avec l'audit du 01/05/2026, format YAML, etc.).
+Si l'audit échoue, aucune modification n'est appliquée — un rapport
+d'échec est créé à la place dans `data/ALSEN_editorial_log_[date].md`.
+
+L'utilisateur peut consulter les rapports hebdomadaires pour comprendre
+ce qui a été appliqué ou bloqué et, le cas échéant, appliquer
+manuellement les modifications bloquées.
+
+Input : `data/ALSEN_editorial_input.md` (état actuel + garde-fous audit).
+Recette : `prompts/editorial_ALSEN.md`.
+
+---
+
 ## Roadmap
 
 - [x] Pipeline complet pour Sensorion (ALSEN.PA)
