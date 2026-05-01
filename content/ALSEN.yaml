@@ -10,6 +10,7 @@ marche: Euronext Growth Paris
 secteur: Biotechnologie
 ville: Montpellier, France
 pea_pme_eligible: true
+cadre_fiscal: PEA-PME    # PEA-PME | Hors PEA-PME — utilisé par l'index pour le regroupement
 
 liens:
   boursorama: https://www.boursorama.com/cours/1rPALSEN/
