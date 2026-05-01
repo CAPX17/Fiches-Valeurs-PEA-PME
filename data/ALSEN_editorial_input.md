@@ -1,11 +1,11 @@
 # Données pour mise à jour éditoriale — Sensorion (ALSEN.PA)
 
-**Date de génération du dump** : 2026-05-01T23:20:28+00:00
+**Date de génération du dump** : 2026-05-01T23:37:29+00:00
 **Source** : content/ALSEN.yaml (état actuel)
 
 Ce fichier est l'input de la routine Claude ÉDITORIALE hebdomadaire.
 Il reflète l'état actuel des sections éditoriales et rappelle les
-garde-fous issus de l'audit du 01/05/2026.
+garde-fous issus de l'audit baseline de ALSEN.PA.
 
 ---
 
@@ -142,16 +142,10 @@ micro-cap.
 - BusinessWire — Détention Sanofi post-offre 13,9 % (27/01/2026)
 - Audit interne data/ALSEN_audit_2026-05-01.md (01/05/2026)
 
-## Audit de référence (01/05/2026)
+## Garde-fous figés pour ALSEN.PA (audit baseline)
 
-Reprise des 3 corrections critiques de l'audit pour rappel à la routine.
 Ces points NE DOIVENT PAS être contredits dans une modification future.
 
-- Concurrence : **Lilly = Akouos** (rachat 2022), **Regeneron = Decibel/Otarmeni**
-  (rachat 2023, AMM FDA accélérée avril 2026). Toute formulation inversée
-  (« Akouos via Regeneron » ou « Decibel via Lilly ») est interdite.
-- Sanofi : **13,9 % du capital post-offre** (PAS « ~11 % »), source
-  BusinessWire 27/01/2026.
-- SENS-40 : programme **historique Phase 2b**, statut à reconfirmer
-  post-pivot gène-thérapie. Aucune relance « SENS-40 multi-indications
-  Phase 2 active » sans communiqué Sensorion 2026 explicite.
+- Concurrence : **Lilly = Akouos** (rachat oct 2022), **Regeneron = Decibel/Otarmeni** (rachat sept 2023, AMM FDA accélérée avril 2026). Toute formulation inversée (« Akouos via Regeneron » ou « Decibel via Lilly ») est interdite.
+- Sanofi : **13,9 % du capital post-offre** (PAS « ~11 % »), source BusinessWire 27/01/2026.
+- SENS-40 : programme **historique Phase 2b**, statut à reconfirmer post-pivot gène-thérapie. Aucune relance « SENS-40 multi-indications Phase 2 active » sans communiqué Sensorion 2026 explicite.
