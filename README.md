@@ -1,10 +1,14 @@
-# Fiches Valeurs PEA-PME
+# Fiches-Valeurs
 
-Générateur statique de fiches d'analyse pour valeurs PEA-PME, hébergé
-gratuitement via GitHub Pages. Les données factuelles (cours, capitalisation,
-indicateurs techniques) sont rafraîchies quotidiennement depuis yfinance ;
-le contenu éditorial (thèse, alertes, pipeline, perspectives) est versionné
-en YAML pour une édition simple et un audit historique propre.
+Générateur statique de fiches d'analyse pour actions cotées (PEA-PME et
+hors PEA-PME), hébergé gratuitement via GitHub Pages. Les données
+factuelles (cours, capitalisation, indicateurs techniques) sont
+rafraîchies quotidiennement depuis yfinance ; le contenu éditorial
+(thèse, alertes, pipeline, perspectives) est versionné en YAML pour
+une édition simple et un audit historique propre.
+
+L'index d'accueil regroupe les fiches en deux sections (PEA-PME / Hors
+PEA-PME) selon le champ `cadre_fiscal` du YAML.
 
 Première fiche disponible : **Sensorion (ALSEN.PA)** — biotech Euronext
 Growth Paris spécialisée en thérapies géniques auditives.
@@ -219,8 +223,8 @@ Recette : `prompts/editorial_ALSEN.md`.
 
 - [x] Pipeline complet pour Sensorion (ALSEN.PA)
 - [x] Régénération quotidienne via GitHub Actions
-- [ ] Extension à d'autres valeurs PEA-PME (un YAML par valeur dans
-      `content/`)
+- [ ] Extension à d'autres valeurs (PEA-PME et hors PEA-PME, un YAML
+      par valeur dans `content/`)
 - [ ] Index multi-fiches sur la home `docs/index.html`
 - [ ] Page d'historique éditorial (diff git rendu en HTML)
 
@@ -232,9 +236,10 @@ Ce dépôt n'est **ni une recommandation d'investissement, ni un conseil
 en investissement** au sens des dispositions du Code monétaire et
 financier. Les analyses publiées reflètent une opinion personnelle, sont
 fournies à titre purement informatif et pédagogique, et peuvent être
-erronées ou obsolètes. Investir en actions, en particulier sur le
-compartiment PEA-PME (small / micro-caps, biotechs), comporte un risque
-de perte en capital pouvant aller jusqu'à la totalité du montant investi.
+erronées ou obsolètes. Investir en actions comporte un risque de perte
+en capital pouvant aller jusqu'à la totalité du montant investi, en
+particulier sur les compartiments small / micro-caps (notamment PEA-PME)
+et sur les valeurs technologiques ou biotech.
 
 Faites vos propres recherches (DYOR) et, si nécessaire, consultez un
 conseiller en investissement financier (CIF) agréé.
