@@ -322,22 +322,48 @@ def build_synthesis_dump(
 # Dump éditorial — input pour la routine ÉDITORIALE hebdomadaire
 # ---------------------------------------------------------------------------
 
-# Audit de référence figé (01/05/2026). Ces 3 corrections sont des
-# garde-fous : la routine éditoriale ne doit JAMAIS produire une
-# modification qui les contredit. Voir data/ALSEN_audit_2026-05-01.md.
-AUDIT_REFERENCE_RAPPEL = """\
-- Concurrence : **Lilly = Akouos** (rachat 2022), **Regeneron = Decibel/Otarmeni**
-  (rachat 2023, AMM FDA accélérée avril 2026). Toute formulation inversée
-  (« Akouos via Regeneron » ou « Decibel via Lilly ») est interdite.
-- Sanofi : **13,9 % du capital post-offre** (PAS « ~11 % »), source
-  BusinessWire 27/01/2026.
-- SENS-40 : programme **historique Phase 2b**, statut à reconfirmer
-  post-pivot gène-thérapie. Aucune relance « SENS-40 multi-indications
-  Phase 2 active » sans communiqué Sensorion 2026 explicite."""
+# Audits de référence figés. Ces garde-fous sont indexés par ticker :
+# la routine éditoriale ne doit JAMAIS produire une modification qui les
+# contredit. Voir data/<TICKER>_audit_<DATE>.md pour la justification
+# détaillée de chaque garde-fou.
+AUDIT_REFERENCE_RAPPEL: dict[str, list[str]] = {
+    "ALSEN.PA": [
+        "Concurrence : **Lilly = Akouos** (rachat oct 2022), **Regeneron = Decibel/Otarmeni** "
+        "(rachat sept 2023, AMM FDA accélérée avril 2026). Toute formulation inversée "
+        "(« Akouos via Regeneron » ou « Decibel via Lilly ») est interdite.",
+        "Sanofi : **13,9 % du capital post-offre** (PAS « ~11 % »), source "
+        "BusinessWire 27/01/2026.",
+        "SENS-40 : programme **historique Phase 2b**, statut à reconfirmer "
+        "post-pivot gène-thérapie. Aucune relance « SENS-40 multi-indications "
+        "Phase 2 active » sans communiqué Sensorion 2026 explicite.",
+    ],
+    "BE": [
+        "Bloom Energy = **SOFC haute température** (PAS PEM comme Plug/Ballard, "
+        "PAS MCFC comme FuelCell Energy). Toute confusion technologique est interdite.",
+        "Société américaine NYSE — **NON éligible PEA-PME**. Aucune routine ne doit "
+        "reclasser BE en cadre PEA-PME.",
+        "Deal Oracle au 27/04/2026 = **2,8 GW total** (1,2 GW déjà sous contrat) "
+        "+ **Project Jupiter 2,45 GW** (BorderPlex, New Mexico) + **warrant Oracle 400 M$** "
+        "sur le stock BE.",
+        "Deal AEP janvier 2026 = **2,65 Md$ pour 1 GW de SOFC**. AWS et Cologix sont "
+        "derrière le premier déploiement Ohio (PUCO juin 2025, 72,9 MW initiaux).",
+        "Crédit hydrogène 45V **raboté** par la One Big Beautiful Bill Act signée par "
+        "Donald Trump le **04/07/2025** (construction obligatoire avant 31/12/2027). "
+        "Le crédit ITC § 48E pour fuel cells reste préservé jusqu'à phase-out post-2032.",
+        "Q1 2026 publié **28/04/2026** : revenus **751,1 M$ (+130,4 % YoY)**, EPS "
+        "**0,44 $**. Guidance FY2026 relevée à **3,4-3,8 Md$** (mid 3,6 Md$).",
+        "Cours **283,36 $ / capi ~80,6 Md$ au 01/05/2026, +134 % YTD 2026** ; "
+        "ratio implicite **~22x mid-guidance FY2026** (calcul transparent capi/guidance).",
+    ],
+}
 
 
 def build_editorial_dump(editorial: dict[str, Any]) -> str:
-    """Produit le Markdown d'input pour la routine ÉDITORIALE hebdomadaire."""
+    """Produit le Markdown d'input pour la routine ÉDITORIALE hebdomadaire.
+
+    Les garde-fous figés (AUDIT_REFERENCE_RAPPEL) sont injectés UNIQUEMENT
+    pour le ticker courant — pas de pollution croisée entre fiches.
+    """
     nom = editorial.get("nom", "")
     ticker = editorial.get("ticker", "")
     sources = editorial.get("sources", []) or []
@@ -349,6 +375,15 @@ def build_editorial_dump(editorial: dict[str, Any]) -> str:
     else:
         sources_block = "_Aucune source référencée._"
 
+    rappels = AUDIT_REFERENCE_RAPPEL.get(ticker, [])
+    if rappels:
+        rappels_block = "\n".join(f"- {r}" for r in rappels)
+    else:
+        rappels_block = (
+            "_Aucun garde-fou figé pour ce ticker. La routine éditoriale "
+            "doit s'appuyer uniquement sur les sources primaires datées._"
+        )
+
     sections = [
         f"# Données pour mise à jour éditoriale — {nom} ({ticker})",
         "",
@@ -357,7 +392,7 @@ def build_editorial_dump(editorial: dict[str, Any]) -> str:
         "",
         "Ce fichier est l'input de la routine Claude ÉDITORIALE hebdomadaire.",
         "Il reflète l'état actuel des sections éditoriales et rappelle les",
-        "garde-fous issus de l'audit du 01/05/2026.",
+        f"garde-fous issus de l'audit baseline de {ticker}.",
         "",
         "---",
         "",
@@ -379,12 +414,11 @@ def build_editorial_dump(editorial: dict[str, Any]) -> str:
         "",
         sources_block,
         "",
-        "## Audit de référence (01/05/2026)",
+        f"## Garde-fous figés pour {ticker} (audit baseline)",
         "",
-        "Reprise des 3 corrections critiques de l'audit pour rappel à la routine.",
         "Ces points NE DOIVENT PAS être contredits dans une modification future.",
         "",
-        AUDIT_REFERENCE_RAPPEL,
+        rappels_block,
         "",
     ]
     return "\n".join(sections)
