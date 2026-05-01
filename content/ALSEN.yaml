@@ -40,10 +40,10 @@ alertes:
     titre: Sanofi 20 M€ dans le tour de 60 M€ de janvier 2026
     description: |
       Financement total 60 M€ bouclé en janvier 2026, dont 20 M€ apportés
-      par Sanofi en investissement stratégique (~11 % de la capitalisation
-      d'environ 190 M€). Position institutionnelle significative d'un Big
-      Pharma mondial qui dispose d'équipes d'analyse spécialisées en
-      thérapie génique.
+      par Sanofi en investissement stratégique (13,9 % du capital
+      post-offre, source BusinessWire 27/01/2026). Position
+      institutionnelle significative d'un Big Pharma mondial qui dispose
+      d'équipes d'analyse spécialisées en thérapie génique.
 
       Lecture : signal de validation scientifique fort, sans pour autant
       constituer une garantie commerciale.
@@ -84,12 +84,27 @@ alertes:
       suite du développement clinique.
 
   - categorie: RISQUE
+    titre: Concurrent approuvé FDA sur OTOF — Otarmeni (Regeneron) avril 2026
+    description: |
+      Regeneron a obtenu en avril 2026 la première AMM accélérée de la
+      FDA pour Otarmeni (lunsotogene parvec-cwha, ex-DB-OTO), thérapie
+      génique ciblant la surdité congénitale OTOF.
+
+      SENS-501 (Sensorion) adresse la même indication mais reste en
+      Phase 1/2. Le first-mover advantage de Regeneron crée un risque
+      commercial significatif : positionnement de marché, accès
+      remboursement, recrutement patients pour les essais SENS-501.
+
+      Source : communiqué Regeneron / FDA, avril 2026.
+
+  - categorie: RISQUE
     titre: Stade précoce, risque binaire et concurrence Big Pharma
     description: |
       Le dossier reste un pari clinique sur des effectifs faibles (Phase
       1/2). La route vers la Phase 3 puis l'AMM est longue (5-8 ans
-      minimum) et la concurrence (Regeneron via Akouos, Lilly via Decibel)
-      dispose de moyens sans commune mesure.
+      minimum) et la concurrence (Lilly via Akouos racheté oct 2022,
+      Regeneron via Decibel racheté sept 2023 → Otarmeni AMM FDA avril
+      2026) dispose de moyens sans commune mesure.
 
       ~515 M actions post-levée janvier 2026 ; nouvelle levée nécessaire
       post-S1 2027. Volatilité structurelle élevée typique d'une biotech
@@ -112,11 +127,11 @@ pipeline:
     stade_class: preclin
     prochaine_etape: CTA Europe S1 2026 · IND USA fin 2026
 
-  - programme: SENS-40
-    indication: SSNHL · Implant cochléaire · Cisplatine
-    stade: Phase 2b / 2a (×3)
+  - programme: SENS-40 (Arazasétron)
+    indication: Surdités sensorineurales (SSNHL)
+    stade: Historique Phase 2b
     stade_class: p2
-    prochaine_etape: Données Phase 2b SSNHL
+    prochaine_etape: Développement repriorisé post-pivot gène-thérapie · statut à reconfirmer
 
   - programme: Programme 3+ (futur)
     indication: Autre surdité génétique — TBD
@@ -152,7 +167,6 @@ perspectives:
       - SENS-601 Phase 1 puis Phase 2 GJB2
       - Partenariat ou deal Big Pharma post-données pivots
       - Plateforme Pasteur — émergence d'un 3ᵉ programme avant 2028
-      - Consensus à 1,65 € (Boursorama) — risque binaire intégré
 
 # -----------------------------------------------------------------------------
 # Synthèse IA (analyse augmentée — pas un avis humain)
@@ -210,3 +224,8 @@ sources:
   - businesswire.com (05/01/2024) — accord Pasteur prolongé 2028
   - businesswire.com (20/04/2026) — AG 11 mai 2026
   - Sensorion (23/03/2026) — SENS-501 données 6M Cohorte 2
+  - BusinessWire — Acquisition Akouos par Lilly (oct 2022)
+  - BusinessWire — Acquisition Decibel par Regeneron (sept 2023)
+  - FDA / Regeneron — AMM accélérée Otarmeni (avril 2026)
+  - BusinessWire — Détention Sanofi post-offre 13,9 % (27/01/2026)
+  - Audit interne data/ALSEN_audit_2026-05-01.md (01/05/2026)
