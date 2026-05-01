@@ -1,6 +1,6 @@
 # Données pour mise à jour éditoriale — Sensorion (ALSEN.PA)
 
-**Date de génération du dump** : 2026-05-01T19:28:40+00:00
+**Date de génération du dump** : 2026-05-01T19:46:34+00:00
 **Source** : content/ALSEN.yaml (état actuel)
 
 Ce fichier est l'input de la routine Claude ÉDITORIALE hebdomadaire.
@@ -69,18 +69,21 @@ pression de financement.
 Une nouvelle levée sera nécessaire après S1 2027 pour financer la
 suite du développement clinique.
 
-**[RISQUE] Concurrent approuvé FDA sur OTOF — Otarmeni (Regeneron) avril 2026**
+**[RISQUE] Concurrent approuvé FDA sur OTOF — Otarmeni (Regeneron) 23 avril 2026**
 
-Regeneron a obtenu en avril 2026 la première AMM accélérée de la
+Regeneron a obtenu le 23 avril 2026 la première AMM accélérée de la
 FDA pour Otarmeni (lunsotogene parvec-cwha, ex-DB-OTO), thérapie
-génique ciblant la surdité congénitale OTOF.
+génique ciblant la surdité congénitale OTOF. Regeneron a annoncé
+concomitamment qu'Otarmeni sera fourni gratuitement aux patients
+américains éligibles ; le prix hors États-Unis n'était pas encore
+fixé au 24 avril 2026.
 
 SENS-501 (Sensorion) adresse la même indication mais reste en
 Phase 1/2. Le first-mover advantage de Regeneron crée un risque
 commercial significatif : positionnement de marché, accès
 remboursement, recrutement patients pour les essais SENS-501.
 
-Source : communiqué Regeneron / FDA, avril 2026.
+Sources : Regeneron IR / FDA, 23/04/2026 ; CNBC, 24/04/2026.
 
 **[RISQUE] Stade précoce, risque binaire et concurrence Big Pharma**
 
@@ -134,7 +137,8 @@ micro-cap.
 - Sensorion (23/03/2026) — SENS-501 données 6M Cohorte 2
 - BusinessWire — Acquisition Akouos par Lilly (oct 2022)
 - BusinessWire — Acquisition Decibel par Regeneron (sept 2023)
-- FDA / Regeneron — AMM accélérée Otarmeni (avril 2026)
+- FDA / Regeneron — AMM accélérée Otarmeni (23/04/2026)
+- CNBC — Regeneron Otarmeni prix hors US (24/04/2026)
 - BusinessWire — Détention Sanofi post-offre 13,9 % (27/01/2026)
 - Audit interne data/ALSEN_audit_2026-05-01.md (01/05/2026)
 
