@@ -1,6 +1,6 @@
 # Données pour synthèse IA — Bloom Energy (BE)
 
-**Date de génération du dump** : 2026-05-01T23:37:29+00:00
+**Date de génération du dump** : 2026-05-02T10:33:41+00:00
 **Source** : yfinance + content/BE.yaml
 
 ---
@@ -197,7 +197,7 @@ Sources : Pierce Atwood (analyse 45V), McGuireWoods (analyse
 
 ## 7. Synthèse IA précédente (pour comparaison)
 
-- Score précédent : 6
+- Score précédent : 5
 - Force du signal précédente : MODÉRÉ
 - Date génération précédente : 2026-05-01
 - Texte de synthèse précédent :
@@ -223,6 +223,15 @@ Sources : Pierce Atwood (analyse 45V), McGuireWoods (analyse
   > s'ajoutent. La « One Big Beautiful Bill Act » (04/07/2025) a raboté
   > le crédit hydrogène 45V, exposant la branche SOEC, tandis que le
   > crédit ITC § 48E pour fuel cells reste préservé jusqu'à 2032+.
+  >
+  > Le score 5/10 reflète l'asymétrie risk/reward : la trajectoire
+  > fondamentale (Q1 2026 +130 %, guidance up, deals Oracle/AEP/
+  > Brookfield documentés) est solide et déjà reconnue, mais le ratio
+  > capi/revenus ~22x FY2026E et le PER estimé ~161 limitent fortement
+  > le upside et exposent à une correction significative en cas de
+  > moindre déception. La force MODÉRÉ traduit la robustesse
+  > fondamentale, le score 5 l'attente d'un point d'entrée plus
+  > favorable.
 - Facteurs positifs précédents :
   - Q1 2026 record (revenus 751 M$, +130 %, EPS 0,44 $) + guidance FY2026 relevée à 3,4-3,8 Md$
   - Deal Oracle 2,8 GW + Project Jupiter 2,45 GW (avril 2026) — visibilité data center IA

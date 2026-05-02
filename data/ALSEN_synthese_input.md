@@ -1,6 +1,6 @@
 # Données pour synthèse IA — Sensorion (ALSEN.PA)
 
-**Date de génération du dump** : 2026-05-01T23:37:29+00:00
+**Date de génération du dump** : 2026-05-02T10:33:41+00:00
 **Source** : yfinance + content/ALSEN.yaml
 
 ---

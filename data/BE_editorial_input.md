@@ -1,6 +1,6 @@
 # Données pour mise à jour éditoriale — Bloom Energy (BE)
 
-**Date de génération du dump** : 2026-05-01T23:37:29+00:00
+**Date de génération du dump** : 2026-05-02T10:33:41+00:00
 **Source** : content/BE.yaml (état actuel)
 
 Ce fichier est l'input de la routine Claude ÉDITORIALE hebdomadaire.

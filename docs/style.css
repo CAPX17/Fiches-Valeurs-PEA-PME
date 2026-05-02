@@ -1110,6 +1110,7 @@ body.page-index {
 
 .index-table {
     width: 100%;
+    table-layout: fixed;
     border-collapse: separate;
     border-spacing: 0;
     background: var(--surface);
@@ -1118,6 +1119,20 @@ body.page-index {
     overflow: hidden;
     font-size: 14px;
 }
+/* Largeurs fixes pour aligner les 2 tableaux PEA-PME et Hors PEA-PME,
+   indépendamment du contenu (devises € vs USD, longueurs variables). */
+.index-table th:nth-child(1),
+.index-table td:nth-child(1) { width: 25%; }
+.index-table th:nth-child(2),
+.index-table td:nth-child(2) { width: 15%; text-align: right; }
+.index-table th:nth-child(3),
+.index-table td:nth-child(3) { width: 12%; text-align: right; }
+.index-table th:nth-child(4),
+.index-table td:nth-child(4) { width: 10%; text-align: right; }
+.index-table th:nth-child(5),
+.index-table td:nth-child(5) { width: 12%; text-align: center; }
+.index-table th:nth-child(6),
+.index-table td:nth-child(6) { width: 26%; text-align: right; }
 .index-table thead th {
     text-align: left;
     background: var(--surface-elevated);
