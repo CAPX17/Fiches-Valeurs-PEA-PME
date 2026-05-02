@@ -328,14 +328,33 @@ def build_synthesis_dump(
 # détaillée de chaque garde-fou.
 AUDIT_REFERENCE_RAPPEL: dict[str, list[str]] = {
     "ALSEN.PA": [
-        "Concurrence : **Lilly = Akouos** (rachat oct 2022), **Regeneron = Decibel/Otarmeni** "
-        "(rachat sept 2023, AMM FDA accélérée avril 2026). Toute formulation inversée "
+        "Concurrence : **Lilly = Akouos** (rachat oct 2022, AK-OTOF en essai Phase 1/2 "
+        "NCT05821959 fin estimée octobre 2028), **Regeneron = Decibel/Otarmeni** "
+        "(rachat sept 2023, AMM FDA accélérée 23/04/2026). Toute formulation inversée "
         "(« Akouos via Regeneron » ou « Decibel via Lilly ») est interdite.",
         "Sanofi : **13,9 % du capital post-offre** (PAS « ~11 % »), source "
-        "BusinessWire 27/01/2026.",
-        "SENS-40 : programme **historique Phase 2b**, statut à reconfirmer "
-        "post-pivot gène-thérapie. Aucune relance « SENS-40 multi-indications "
-        "Phase 2 active » sans communiqué Sensorion 2026 explicite.",
+        "BusinessWire 27/01/2026. Tour 60 M€ via émission de 214 285 714 actions à "
+        "0,28 €, **dilution ~71 % du capital antérieur**.",
+        "**SENS-401** (et non « SENS-40 ») = arazasétron, petite molécule. Indications "
+        "historiques : SSNHL Phase 2b achevée selon BioSpace 18/03/2026 · implant "
+        "cochléaire Phase 2a en partenariat Cochlear Limited (critère pharmacocinétique "
+        "atteint en 2024) · cisplatine/CIO Phase 2 NOTOXIS achevée au T1 2026 selon "
+        "Sensorion FY2025 PR. Statut secondaire post-pivot gène-thérapie.",
+        "**Démission CEO Nawal Ouzren le 16/02/2026** (PR primaire BusinessWire ; "
+        "certains relais secondaires datent l'annonce du 17/02). Amit Munshi (président "
+        "CA) assure l'intérim ; CEO permanent à nommer. Toute mise à jour future doit "
+        "refléter le statut intérim jusqu'à nomination du successeur.",
+        "**Épidémiologie scientifique** : OTOF = 1-8 % des surdités congénitales non "
+        "syndromiques (GeneReviews) ; GJB2 = jusqu'à 50 % des surdités AR non syndromiques "
+        "prélinguales (OMIM, Genetics in Medicine). Les formulations antérieures "
+        "« 30-40 % GJB2 » ou « ~1 % OTOF » sont interdites.",
+        "**Programmes Pasteur à ce jour** : SENS-501 (OTOF-GT) et SENS-601 (GJB2-GT). "
+        "L'accord-cadre prolongé jusqu'au 31/12/2028 laisse la possibilité de programmes "
+        "additionnels mais aucune source publique 2025-2026 n'en confirme un troisième actif.",
+        "**SENS-501 Cohorte 2** (Audiogene NCT06370351) : 6 patients traités au total "
+        "(2 cohortes), 2/3 patients dose haute (4,5×10¹¹ vg/oreille) ont conservé à 6 mois "
+        "des gains audiométriques de l'ordre de 60-70 dB HL aux fréquences les plus "
+        "performantes (Sensorion PR 23/03/2026). 0 EI grave rapporté.",
     ],
     "BE": [
         "Bloom Energy = **SOFC haute température** (PAS PEM comme Plug/Ballard, "
