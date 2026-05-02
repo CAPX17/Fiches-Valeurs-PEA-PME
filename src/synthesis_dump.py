@@ -315,6 +315,23 @@ def build_synthesis_dump(
         _fmt_synthese_precedente(synthese_prev),
         "",
     ]
+
+    # Section 8 : garde-fous d'audit (structurels + hebdo durcis)
+    # Injectés pour permettre aux sous-agents A et B (Pattern C+ allégé)
+    # de tester leurs propositions contre les conclusions des audits.
+    struct_block, hebdo_block = _format_audit_rappel(ticker)
+    sections.extend([
+        f"## 8. Garde-fous d'audit pour {ticker}",
+        "",
+        "### Garde-fous structurels (faits stables — ne pas contredire)",
+        "",
+        struct_block,
+        "",
+        "### Garde-fous hebdo durcis (règles procédurales pour les routines)",
+        "",
+        hebdo_block,
+        "",
+    ])
     return "\n".join(sections)
 
 
@@ -322,78 +339,134 @@ def build_synthesis_dump(
 # Dump éditorial — input pour la routine ÉDITORIALE hebdomadaire
 # ---------------------------------------------------------------------------
 
-# Audits de référence figés. Ces garde-fous sont indexés par ticker :
-# la routine éditoriale ne doit JAMAIS produire une modification qui les
-# contredit. Voir data/<TICKER>_audit_<DATE>.md pour la justification
-# détaillée de chaque garde-fou.
-AUDIT_REFERENCE_RAPPEL: dict[str, list[str]] = {
-    "ALSEN.PA": [
-        "Concurrence : **Lilly = Akouos** (rachat oct 2022, AK-OTOF en essai Phase 1/2 "
-        "NCT05821959 fin estimée octobre 2028), **Regeneron = Decibel/Otarmeni** "
-        "(rachat sept 2023, AMM FDA accélérée 23/04/2026). Toute formulation inversée "
-        "(« Akouos via Regeneron » ou « Decibel via Lilly ») est interdite.",
-        "Sanofi : **13,9 % du capital post-offre** (PAS « ~11 % »), source "
-        "BusinessWire 27/01/2026. Tour 60 M€ via émission de 214 285 714 actions à "
-        "0,28 €, **dilution ~71 % du capital antérieur**.",
-        "**SENS-401** (et non « SENS-40 ») = arazasétron, petite molécule. Indications "
-        "historiques : SSNHL Phase 2b achevée selon BioSpace 18/03/2026 · implant "
-        "cochléaire Phase 2a en partenariat Cochlear Limited (critère pharmacocinétique "
-        "atteint en 2024) · cisplatine/CIO Phase 2 NOTOXIS achevée au T1 2026 selon "
-        "Sensorion FY2025 PR. Statut secondaire post-pivot gène-thérapie.",
-        "**Démission CEO Nawal Ouzren le 16/02/2026** (PR primaire BusinessWire ; "
-        "certains relais secondaires datent l'annonce du 17/02). Amit Munshi (président "
-        "CA) assure l'intérim ; CEO permanent à nommer. Toute mise à jour future doit "
-        "refléter le statut intérim jusqu'à nomination du successeur.",
-        "**Épidémiologie scientifique** : OTOF = 1-8 % des surdités congénitales non "
-        "syndromiques (GeneReviews) ; GJB2 = jusqu'à 50 % des surdités AR non syndromiques "
-        "prélinguales (OMIM, Genetics in Medicine). Les formulations antérieures "
-        "« 30-40 % GJB2 » ou « ~1 % OTOF » sont interdites.",
-        "**Programmes Pasteur à ce jour** : SENS-501 (OTOF-GT) et SENS-601 (GJB2-GT). "
-        "L'accord-cadre prolongé jusqu'au 31/12/2028 laisse la possibilité de programmes "
-        "additionnels mais aucune source publique 2025-2026 n'en confirme un troisième actif.",
-        "**SENS-501 Cohorte 2** (Audiogene NCT06370351) : 6 patients traités au total "
-        "(2 cohortes), 2/3 patients dose haute (4,5×10¹¹ vg/oreille) ont conservé à 6 mois "
-        "des gains audiométriques de l'ordre de 60-70 dB HL aux fréquences les plus "
-        "performantes (Sensorion PR 23/03/2026). 0 EI grave rapporté.",
-    ],
-    "BE": [
-        "Bloom Energy = **SOFC haute température** (PAS PEM comme Plug/Ballard, "
-        "PAS MCFC comme FuelCell Energy). Toute confusion technologique est interdite.",
-        "Société américaine NYSE — **NON éligible PEA-PME**. Aucune routine ne doit "
-        "reclasser BE en cadre PEA-PME.",
-        "Deal Oracle au 27/04/2026 = **2,8 GW total** (1,2 GW déjà sous contrat) "
-        "+ **Project Jupiter 2,45 GW** (BorderPlex, New Mexico) + **warrant Oracle 400 M$** "
-        "sur le stock BE (émis 09/04/2026, termes annoncés 30/10/2025).",
-        "Deal AEP janvier 2026 = **2,65 Md$ pour 1 GW de SOFC** (~20 ans d'offtake). "
-        "Premier déploiement Ohio : site Hilliard 72,9 MW (PUCO 28/05/2025) — "
-        "AWS contrat 6 ans, Cologix contrat 15 ans.",
-        "Crédit hydrogène 45V **raboté** par la One Big Beautiful Bill Act signée par "
-        "Donald Trump le **04/07/2025** (construction obligatoire avant 31/12/2027). "
-        "Le 45V reste **exempté des restrictions FEoC** (Baker Botts, K&L Gates). "
-        "Le crédit ITC § 48E pour fuel cells reste préservé à 30 % jusqu'à phase-out "
-        "à partir de 2034.",
-        "Q1 2026 publié **28/04/2026** : revenus **751,1 M$ (+130,4 % YoY)**, "
-        "**EPS GAAP dilué 0,23 $** (vs perte 0,10 $) et **EPS non-GAAP 0,44 $**. "
-        "Marge brute Q1 GAAP 30,0 %, non-GAAP 31,5 %. Guidance FY2026 relevée à "
-        "**3,4-3,8 Md$** (mid 3,6 Md$).",
-        "Cours **283,36 $ / capi ~80,6 Md$ au 01/05/2026, +134 % YTD 2026** ; "
-        "ratio implicite **~22x mid-guidance FY2026** (calcul transparent capi/guidance).",
-        "**Cummins/Accelera NON concurrent SOFC stationnaire data centers** au 02/05/2026 "
-        "(revue stratégique nov 2025 + charge non-cash 240 M$ + cession activité fuel cell "
-        "rail à Alstom avril 2026). Toute mention future de Cummins comme concurrent SOFC "
-        "data centers doit être corroborée par un communiqué primaire 2026+.",
-        "**CFO Simon Edwards effectif 13/04/2026** (ex-Groq, en remplacement de Daniel "
-        "Berenbaum). KR Sridhar reste fondateur, président du conseil et CEO depuis 2001.",
-        "**Bilan Q1 2026** : cash + restreint **2,52 Md$**, dette totale 2,60 Md$, "
-        "**dette nette ~80 M$** ; **OCF Q1 2026 +73,6 M$** (vs −110,7 M$ Q1 2025) — "
-        "retournement cash structurel. 75 M$ crédits 48C reçus avril 2024 (expansion Fremont).",
-        "**Backlog ~20 Md$** (~6 Md$ produit + ~14 Md$ service) = chiffre d'analystes "
-        "tier 2 (TIKR, EnkiAI), **NON confirmé par communiqué Bloom officiel**. Toute "
-        "mention doit utiliser une attribution prudente jusqu'à confirmation 10-K.",
-        "**« 5 GW/an » = vision long terme non datée** (claim management). Seul l'objectif "
-        "**2 GW/an d'ici fin 2026** est officiellement daté par Bloom IR.",
-    ],
+# Audits de référence figés. Structure imbriquée par ticker :
+#   - garde_fous_structurels : conclusions des audits baseline + recalCplus
+#       (faits factuels stables qu'aucune routine ne doit contredire).
+#   - garde_fous_hebdo_durcis : règles procédurales que les routines hebdo
+#       (Pattern C+ allégé) doivent appliquer à toute modification candidate.
+# Voir data/<TICKER>_audit_<DATE>.md et data/<TICKER>_recalCplus_*.md pour
+# la justification détaillée des garde-fous structurels.
+
+# Règles procédurales communes aux routines hebdo de toutes les fiches.
+# Chaque ticker peut surcharger via une liste spécifique si besoin.
+HEBDO_DURCIS_DEFAULTS: list[str] = [
+    "Toute modification d'un chiffre clé (cours, capi, trésorerie, "
+    "% de détention, dilution) requiert **3 sources primaires concordantes** "
+    "datées < 7 jours.",
+    "Toute **suppression d'alerte présente depuis < 30 jours** est bloquée "
+    "sauf si l'événement de la semaine la rend explicitement obsolète "
+    "(source primaire à l'appui).",
+    "Toute modification touchant un **garde-fou structurel** est bloquée "
+    "automatiquement par la règle R3/R6 du méta-audit C.",
+    "Toute claim de confiance **FAIBLE** chez A ou B est ignorée — "
+    "pas de mode « Selon [source unique] » sur claim faible.",
+    "Toute modification du **score IA > 1 point en valeur absolue** "
+    "requiert une justification factuelle nouvelle, datée et sourcée "
+    "dans la fenêtre 7 jours. Sinon score inchangé.",
+]
+
+AUDIT_REFERENCE_RAPPEL: dict[str, dict[str, list[str]]] = {
+    "ALSEN.PA": {
+        "garde_fous_structurels": [
+            "Concurrence : **Lilly = Akouos** (rachat oct 2022, AK-OTOF en essai Phase 1/2 "
+            "NCT05821959 fin estimée octobre 2028), **Regeneron = Decibel/Otarmeni** "
+            "(rachat sept 2023, AMM FDA accélérée 23/04/2026). Toute formulation inversée "
+            "(« Akouos via Regeneron » ou « Decibel via Lilly ») est interdite.",
+            "Sanofi : **13,9 % du capital post-offre** (PAS « ~11 % »), source "
+            "BusinessWire 27/01/2026. Tour 60 M€ via émission de 214 285 714 actions à "
+            "0,28 €, **dilution ~71 % du capital antérieur**.",
+            "**SENS-401** (et non « SENS-40 ») = arazasétron, petite molécule. Indications "
+            "historiques : SSNHL Phase 2b achevée selon BioSpace 18/03/2026 · implant "
+            "cochléaire Phase 2a en partenariat Cochlear Limited (critère pharmacocinétique "
+            "atteint en 2024) · cisplatine/CIO Phase 2 NOTOXIS achevée au T1 2026 selon "
+            "Sensorion FY2025 PR. Statut secondaire post-pivot gène-thérapie.",
+            "**Démission CEO Nawal Ouzren le 16/02/2026** (PR primaire BusinessWire ; "
+            "certains relais secondaires datent l'annonce du 17/02). Amit Munshi (président "
+            "CA) assure l'intérim ; CEO permanent à nommer. Toute mise à jour future doit "
+            "refléter le statut intérim jusqu'à nomination du successeur.",
+            "**Épidémiologie scientifique** : OTOF = 1-8 % des surdités congénitales non "
+            "syndromiques (GeneReviews) ; GJB2 = jusqu'à 50 % des surdités AR non syndromiques "
+            "prélinguales (OMIM, Genetics in Medicine). Les formulations antérieures "
+            "« 30-40 % GJB2 » ou « ~1 % OTOF » sont interdites.",
+            "**Programmes Pasteur à ce jour** : SENS-501 (OTOF-GT) et SENS-601 (GJB2-GT). "
+            "L'accord-cadre prolongé jusqu'au 31/12/2028 laisse la possibilité de programmes "
+            "additionnels mais aucune source publique 2025-2026 n'en confirme un troisième actif.",
+            "**SENS-501 Cohorte 2** (Audiogene NCT06370351) : 6 patients traités au total "
+            "(2 cohortes), 2/3 patients dose haute (4,5×10¹¹ vg/oreille) ont conservé à 6 mois "
+            "des gains audiométriques de l'ordre de 60-70 dB HL aux fréquences les plus "
+            "performantes (Sensorion PR 23/03/2026). 0 EI grave rapporté.",
+        ],
+        "garde_fous_hebdo_durcis": HEBDO_DURCIS_DEFAULTS,
+    },
+    "BE": {
+        "garde_fous_structurels": [
+            "Bloom Energy = **SOFC haute température** (PAS PEM comme Plug/Ballard, "
+            "PAS MCFC comme FuelCell Energy). Toute confusion technologique est interdite.",
+            "Société américaine NYSE — **NON éligible PEA-PME**. Aucune routine ne doit "
+            "reclasser BE en cadre PEA-PME.",
+            "Deal Oracle au 27/04/2026 = **2,8 GW total** (1,2 GW déjà sous contrat) "
+            "+ **Project Jupiter 2,45 GW** (BorderPlex, New Mexico) + **warrant Oracle 400 M$** "
+            "sur le stock BE (émis 09/04/2026, termes annoncés 30/10/2025).",
+            "Deal AEP janvier 2026 = **2,65 Md$ pour 1 GW de SOFC** (~20 ans d'offtake). "
+            "Premier déploiement Ohio : site Hilliard 72,9 MW (PUCO 28/05/2025) — "
+            "AWS contrat 6 ans, Cologix contrat 15 ans.",
+            "Crédit hydrogène 45V **raboté** par la One Big Beautiful Bill Act signée par "
+            "Donald Trump le **04/07/2025** (construction obligatoire avant 31/12/2027). "
+            "Le 45V reste **exempté des restrictions FEoC** (Baker Botts, K&L Gates). "
+            "Le crédit ITC § 48E pour fuel cells reste préservé à 30 % jusqu'à phase-out "
+            "à partir de 2034.",
+            "Q1 2026 publié **28/04/2026** : revenus **751,1 M$ (+130,4 % YoY)**, "
+            "**EPS GAAP dilué 0,23 $** (vs perte 0,10 $) et **EPS non-GAAP 0,44 $**. "
+            "Marge brute Q1 GAAP 30,0 %, non-GAAP 31,5 %. Guidance FY2026 relevée à "
+            "**3,4-3,8 Md$** (mid 3,6 Md$).",
+            "Cours **283,36 $ / capi ~80,6 Md$ au 01/05/2026, +134 % YTD 2026** ; "
+            "ratio implicite **~22x mid-guidance FY2026** (calcul transparent capi/guidance).",
+            "**Cummins/Accelera NON concurrent SOFC stationnaire data centers** au 02/05/2026 "
+            "(revue stratégique nov 2025 + charge non-cash 240 M$ + cession activité fuel cell "
+            "rail à Alstom avril 2026). Toute mention future de Cummins comme concurrent SOFC "
+            "data centers doit être corroborée par un communiqué primaire 2026+.",
+            "**CFO Simon Edwards effectif 13/04/2026** (ex-Groq, en remplacement de Daniel "
+            "Berenbaum). KR Sridhar reste fondateur, président du conseil et CEO depuis 2001.",
+            "**Bilan Q1 2026** : cash + restreint **2,52 Md$**, dette totale 2,60 Md$, "
+            "**dette nette ~80 M$** ; **OCF Q1 2026 +73,6 M$** (vs −110,7 M$ Q1 2025) — "
+            "retournement cash structurel. 75 M$ crédits 48C reçus avril 2024 (expansion Fremont).",
+            "**Backlog ~20 Md$** (~6 Md$ produit + ~14 Md$ service) = chiffre d'analystes "
+            "tier 2 (TIKR, EnkiAI), **NON confirmé par communiqué Bloom officiel**. Toute "
+            "mention doit utiliser une attribution prudente jusqu'à confirmation 10-K.",
+            "**« 5 GW/an » = vision long terme non datée** (claim management). Seul l'objectif "
+            "**2 GW/an d'ici fin 2026** est officiellement daté par Bloom IR.",
+        ],
+        "garde_fous_hebdo_durcis": HEBDO_DURCIS_DEFAULTS,
+    },
 }
+
+
+def _format_audit_rappel(ticker: str) -> tuple[str, str]:
+    """Retourne (bloc_structurels, bloc_hebdo_durcis) en Markdown.
+
+    Si le ticker n'a pas de garde-fous, retourne des messages neutres.
+    """
+    rappels = AUDIT_REFERENCE_RAPPEL.get(ticker, {})
+    structurels = rappels.get("garde_fous_structurels", []) if isinstance(rappels, dict) else rappels
+    hebdo = rappels.get("garde_fous_hebdo_durcis", []) if isinstance(rappels, dict) else []
+
+    if structurels:
+        struct_block = "\n".join(f"- {s}" for s in structurels)
+    else:
+        struct_block = (
+            "_Aucun garde-fou structurel figé pour ce ticker. La routine "
+            "doit s'appuyer uniquement sur les sources primaires datées._"
+        )
+
+    if hebdo:
+        hebdo_block = "\n".join(f"- {h}" for h in hebdo)
+    else:
+        hebdo_block = (
+            "_Aucune règle hebdo durcie spécifique. Appliquer la checklist "
+            "T1-T6 et le méta-audit M1-M5 sans contrainte additionnelle._"
+        )
+
+    return struct_block, hebdo_block
 
 
 def build_editorial_dump(editorial: dict[str, Any]) -> str:
@@ -401,6 +474,9 @@ def build_editorial_dump(editorial: dict[str, Any]) -> str:
 
     Les garde-fous figés (AUDIT_REFERENCE_RAPPEL) sont injectés UNIQUEMENT
     pour le ticker courant — pas de pollution croisée entre fiches.
+    Deux blocs distincts sont produits :
+      - garde-fous structurels (faits stables issus de l'audit baseline)
+      - garde-fous hebdo durcis (règles procédurales pour les routines)
     """
     nom = editorial.get("nom", "")
     ticker = editorial.get("ticker", "")
@@ -413,14 +489,7 @@ def build_editorial_dump(editorial: dict[str, Any]) -> str:
     else:
         sources_block = "_Aucune source référencée._"
 
-    rappels = AUDIT_REFERENCE_RAPPEL.get(ticker, [])
-    if rappels:
-        rappels_block = "\n".join(f"- {r}" for r in rappels)
-    else:
-        rappels_block = (
-            "_Aucun garde-fou figé pour ce ticker. La routine éditoriale "
-            "doit s'appuyer uniquement sur les sources primaires datées._"
-        )
+    struct_block, hebdo_block = _format_audit_rappel(ticker)
 
     sections = [
         f"# Données pour mise à jour éditoriale — {nom} ({ticker})",
@@ -428,9 +497,8 @@ def build_editorial_dump(editorial: dict[str, Any]) -> str:
         f"**Date de génération du dump** : {now_iso}",
         f"**Source** : content/{ticker.split('.')[0]}.yaml (état actuel)",
         "",
-        "Ce fichier est l'input de la routine Claude ÉDITORIALE hebdomadaire.",
-        "Il reflète l'état actuel des sections éditoriales et rappelle les",
-        f"garde-fous issus de l'audit baseline de {ticker}.",
+        "Ce fichier est l'input de la routine Claude ÉDITORIALE hebdomadaire",
+        "(Pattern C+ allégé : sous-agents A et B indépendants + méta-audit C).",
         "",
         "---",
         "",
@@ -452,11 +520,20 @@ def build_editorial_dump(editorial: dict[str, Any]) -> str:
         "",
         sources_block,
         "",
-        f"## Garde-fous figés pour {ticker} (audit baseline)",
+        f"## Garde-fous structurels figés pour {ticker}",
         "",
-        "Ces points NE DOIVENT PAS être contredits dans une modification future.",
+        "Ces faits issus de l'audit baseline + recalibrage Pattern C+ NE",
+        "DOIVENT PAS être contredits par une modification future. Toute",
+        "modification les touchant est bloquée par R3/R6 du méta-audit C.",
         "",
-        rappels_block,
+        struct_block,
+        "",
+        f"## Garde-fous hebdo durcis pour les routines de {ticker}",
+        "",
+        "Règles procédurales que les sous-agents A, B et C de la routine",
+        "hebdomadaire doivent appliquer à toute modification candidate.",
+        "",
+        hebdo_block,
         "",
     ]
     return "\n".join(sections)
