@@ -1,11 +1,10 @@
 # Données pour mise à jour éditoriale — Sensorion (ALSEN.PA)
 
-**Date de génération du dump** : 2026-05-02T14:03:48+00:00
+**Date de génération du dump** : 2026-05-02T14:46:59+00:00
 **Source** : content/ALSEN.yaml (état actuel)
 
-Ce fichier est l'input de la routine Claude ÉDITORIALE hebdomadaire.
-Il reflète l'état actuel des sections éditoriales et rappelle les
-garde-fous issus de l'audit baseline de ALSEN.PA.
+Ce fichier est l'input de la routine Claude ÉDITORIALE hebdomadaire
+(Pattern C+ allégé : sous-agents A et B indépendants + méta-audit C).
 
 ---
 
@@ -188,9 +187,11 @@ typique d'une biotech micro-cap.
 - Audit interne data/ALSEN_audit_2026-05-01.md (01/05/2026)
 - Recalibrage Pattern C+ data/ALSEN_recalCplus_*.md (02/05/2026)
 
-## Garde-fous figés pour ALSEN.PA (audit baseline)
+## Garde-fous structurels figés pour ALSEN.PA
 
-Ces points NE DOIVENT PAS être contredits dans une modification future.
+Ces faits issus de l'audit baseline + recalibrage Pattern C+ NE
+DOIVENT PAS être contredits par une modification future. Toute
+modification les touchant est bloquée par R3/R6 du méta-audit C.
 
 - Concurrence : **Lilly = Akouos** (rachat oct 2022, AK-OTOF en essai Phase 1/2 NCT05821959 fin estimée octobre 2028), **Regeneron = Decibel/Otarmeni** (rachat sept 2023, AMM FDA accélérée 23/04/2026). Toute formulation inversée (« Akouos via Regeneron » ou « Decibel via Lilly ») est interdite.
 - Sanofi : **13,9 % du capital post-offre** (PAS « ~11 % »), source BusinessWire 27/01/2026. Tour 60 M€ via émission de 214 285 714 actions à 0,28 €, **dilution ~71 % du capital antérieur**.
@@ -199,3 +200,14 @@ Ces points NE DOIVENT PAS être contredits dans une modification future.
 - **Épidémiologie scientifique** : OTOF = 1-8 % des surdités congénitales non syndromiques (GeneReviews) ; GJB2 = jusqu'à 50 % des surdités AR non syndromiques prélinguales (OMIM, Genetics in Medicine). Les formulations antérieures « 30-40 % GJB2 » ou « ~1 % OTOF » sont interdites.
 - **Programmes Pasteur à ce jour** : SENS-501 (OTOF-GT) et SENS-601 (GJB2-GT). L'accord-cadre prolongé jusqu'au 31/12/2028 laisse la possibilité de programmes additionnels mais aucune source publique 2025-2026 n'en confirme un troisième actif.
 - **SENS-501 Cohorte 2** (Audiogene NCT06370351) : 6 patients traités au total (2 cohortes), 2/3 patients dose haute (4,5×10¹¹ vg/oreille) ont conservé à 6 mois des gains audiométriques de l'ordre de 60-70 dB HL aux fréquences les plus performantes (Sensorion PR 23/03/2026). 0 EI grave rapporté.
+
+## Garde-fous hebdo durcis pour les routines de ALSEN.PA
+
+Règles procédurales que les sous-agents A, B et C de la routine
+hebdomadaire doivent appliquer à toute modification candidate.
+
+- Toute modification d'un chiffre clé (cours, capi, trésorerie, % de détention, dilution) requiert **3 sources primaires concordantes** datées < 7 jours.
+- Toute **suppression d'alerte présente depuis < 30 jours** est bloquée sauf si l'événement de la semaine la rend explicitement obsolète (source primaire à l'appui).
+- Toute modification touchant un **garde-fou structurel** est bloquée automatiquement par la règle R3/R6 du méta-audit C.
+- Toute claim de confiance **FAIBLE** chez A ou B est ignorée — pas de mode « Selon [source unique] » sur claim faible.
+- Toute modification du **score IA > 1 point en valeur absolue** requiert une justification factuelle nouvelle, datée et sourcée dans la fenêtre 7 jours. Sinon score inchangé.

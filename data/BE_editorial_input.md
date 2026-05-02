@@ -1,11 +1,10 @@
 # Données pour mise à jour éditoriale — Bloom Energy (BE)
 
-**Date de génération du dump** : 2026-05-02T14:03:48+00:00
+**Date de génération du dump** : 2026-05-02T14:46:59+00:00
 **Source** : content/BE.yaml (état actuel)
 
-Ce fichier est l'input de la routine Claude ÉDITORIALE hebdomadaire.
-Il reflète l'état actuel des sections éditoriales et rappelle les
-garde-fous issus de l'audit baseline de BE.
+Ce fichier est l'input de la routine Claude ÉDITORIALE hebdomadaire
+(Pattern C+ allégé : sous-agents A et B indépendants + méta-audit C).
 
 ---
 
@@ -273,9 +272,11 @@ Austin, K&L Gates, Foley Hoag.
 - Audit interne data/BE_audit_2026-05-01.md (01/05/2026)
 - Recalibrage Pattern C+ data/BE_recalCplus_*.md (02/05/2026)
 
-## Garde-fous figés pour BE (audit baseline)
+## Garde-fous structurels figés pour BE
 
-Ces points NE DOIVENT PAS être contredits dans une modification future.
+Ces faits issus de l'audit baseline + recalibrage Pattern C+ NE
+DOIVENT PAS être contredits par une modification future. Toute
+modification les touchant est bloquée par R3/R6 du méta-audit C.
 
 - Bloom Energy = **SOFC haute température** (PAS PEM comme Plug/Ballard, PAS MCFC comme FuelCell Energy). Toute confusion technologique est interdite.
 - Société américaine NYSE — **NON éligible PEA-PME**. Aucune routine ne doit reclasser BE en cadre PEA-PME.
@@ -289,3 +290,14 @@ Ces points NE DOIVENT PAS être contredits dans une modification future.
 - **Bilan Q1 2026** : cash + restreint **2,52 Md$**, dette totale 2,60 Md$, **dette nette ~80 M$** ; **OCF Q1 2026 +73,6 M$** (vs −110,7 M$ Q1 2025) — retournement cash structurel. 75 M$ crédits 48C reçus avril 2024 (expansion Fremont).
 - **Backlog ~20 Md$** (~6 Md$ produit + ~14 Md$ service) = chiffre d'analystes tier 2 (TIKR, EnkiAI), **NON confirmé par communiqué Bloom officiel**. Toute mention doit utiliser une attribution prudente jusqu'à confirmation 10-K.
 - **« 5 GW/an » = vision long terme non datée** (claim management). Seul l'objectif **2 GW/an d'ici fin 2026** est officiellement daté par Bloom IR.
+
+## Garde-fous hebdo durcis pour les routines de BE
+
+Règles procédurales que les sous-agents A, B et C de la routine
+hebdomadaire doivent appliquer à toute modification candidate.
+
+- Toute modification d'un chiffre clé (cours, capi, trésorerie, % de détention, dilution) requiert **3 sources primaires concordantes** datées < 7 jours.
+- Toute **suppression d'alerte présente depuis < 30 jours** est bloquée sauf si l'événement de la semaine la rend explicitement obsolète (source primaire à l'appui).
+- Toute modification touchant un **garde-fou structurel** est bloquée automatiquement par la règle R3/R6 du méta-audit C.
+- Toute claim de confiance **FAIBLE** chez A ou B est ignorée — pas de mode « Selon [source unique] » sur claim faible.
+- Toute modification du **score IA > 1 point en valeur absolue** requiert une justification factuelle nouvelle, datée et sourcée dans la fenêtre 7 jours. Sinon score inchangé.

@@ -1,6 +1,6 @@
 # Données pour synthèse IA — Bloom Energy (BE)
 
-**Date de génération du dump** : 2026-05-02T14:03:48+00:00
+**Date de génération du dump** : 2026-05-02T14:46:59+00:00
 **Source** : yfinance + content/BE.yaml
 
 ---
@@ -339,3 +339,28 @@ Austin, K&L Gates, Foley Hoag.
   - Concentration client (Oracle/AEP/Brookfield dominent le backlog)
   - Warrant Oracle 400 M$ — dilution potentielle structurelle
   - Crédit 45V raboté par la One Big Beautiful Bill Act (04/07/2025) — branche SOEC exposée
+
+## 8. Garde-fous d'audit pour BE
+
+### Garde-fous structurels (faits stables — ne pas contredire)
+
+- Bloom Energy = **SOFC haute température** (PAS PEM comme Plug/Ballard, PAS MCFC comme FuelCell Energy). Toute confusion technologique est interdite.
+- Société américaine NYSE — **NON éligible PEA-PME**. Aucune routine ne doit reclasser BE en cadre PEA-PME.
+- Deal Oracle au 27/04/2026 = **2,8 GW total** (1,2 GW déjà sous contrat) + **Project Jupiter 2,45 GW** (BorderPlex, New Mexico) + **warrant Oracle 400 M$** sur le stock BE (émis 09/04/2026, termes annoncés 30/10/2025).
+- Deal AEP janvier 2026 = **2,65 Md$ pour 1 GW de SOFC** (~20 ans d'offtake). Premier déploiement Ohio : site Hilliard 72,9 MW (PUCO 28/05/2025) — AWS contrat 6 ans, Cologix contrat 15 ans.
+- Crédit hydrogène 45V **raboté** par la One Big Beautiful Bill Act signée par Donald Trump le **04/07/2025** (construction obligatoire avant 31/12/2027). Le 45V reste **exempté des restrictions FEoC** (Baker Botts, K&L Gates). Le crédit ITC § 48E pour fuel cells reste préservé à 30 % jusqu'à phase-out à partir de 2034.
+- Q1 2026 publié **28/04/2026** : revenus **751,1 M$ (+130,4 % YoY)**, **EPS GAAP dilué 0,23 $** (vs perte 0,10 $) et **EPS non-GAAP 0,44 $**. Marge brute Q1 GAAP 30,0 %, non-GAAP 31,5 %. Guidance FY2026 relevée à **3,4-3,8 Md$** (mid 3,6 Md$).
+- Cours **283,36 $ / capi ~80,6 Md$ au 01/05/2026, +134 % YTD 2026** ; ratio implicite **~22x mid-guidance FY2026** (calcul transparent capi/guidance).
+- **Cummins/Accelera NON concurrent SOFC stationnaire data centers** au 02/05/2026 (revue stratégique nov 2025 + charge non-cash 240 M$ + cession activité fuel cell rail à Alstom avril 2026). Toute mention future de Cummins comme concurrent SOFC data centers doit être corroborée par un communiqué primaire 2026+.
+- **CFO Simon Edwards effectif 13/04/2026** (ex-Groq, en remplacement de Daniel Berenbaum). KR Sridhar reste fondateur, président du conseil et CEO depuis 2001.
+- **Bilan Q1 2026** : cash + restreint **2,52 Md$**, dette totale 2,60 Md$, **dette nette ~80 M$** ; **OCF Q1 2026 +73,6 M$** (vs −110,7 M$ Q1 2025) — retournement cash structurel. 75 M$ crédits 48C reçus avril 2024 (expansion Fremont).
+- **Backlog ~20 Md$** (~6 Md$ produit + ~14 Md$ service) = chiffre d'analystes tier 2 (TIKR, EnkiAI), **NON confirmé par communiqué Bloom officiel**. Toute mention doit utiliser une attribution prudente jusqu'à confirmation 10-K.
+- **« 5 GW/an » = vision long terme non datée** (claim management). Seul l'objectif **2 GW/an d'ici fin 2026** est officiellement daté par Bloom IR.
+
+### Garde-fous hebdo durcis (règles procédurales pour les routines)
+
+- Toute modification d'un chiffre clé (cours, capi, trésorerie, % de détention, dilution) requiert **3 sources primaires concordantes** datées < 7 jours.
+- Toute **suppression d'alerte présente depuis < 30 jours** est bloquée sauf si l'événement de la semaine la rend explicitement obsolète (source primaire à l'appui).
+- Toute modification touchant un **garde-fou structurel** est bloquée automatiquement par la règle R3/R6 du méta-audit C.
+- Toute claim de confiance **FAIBLE** chez A ou B est ignorée — pas de mode « Selon [source unique] » sur claim faible.
+- Toute modification du **score IA > 1 point en valeur absolue** requiert une justification factuelle nouvelle, datée et sourcée dans la fenêtre 7 jours. Sinon score inchangé.
