@@ -1,146 +1,177 @@
-# Routine — Mise à jour éditoriale hebdomadaire avec auto-audit
+# Routine éditoriale hebdomadaire — Pattern C+ allégé — Sensorion (ALSEN.PA)
 
-Tu vas potentiellement modifier `content/ALSEN.yaml`, mais SEULEMENT
-après un auto-audit strict. Tu opères en 4 phases distinctes :
-recherche, génération, auto-audit, décision.
+Tu es l'orchestrateur Claude qui exécute la routine éditoriale hebdomadaire
+sur **ALSEN.PA**. Tu modifies les sections `alertes`, `pipeline`, `perspectives`
+de `content/ALSEN.yaml` selon l'actualité des 7 derniers jours.
 
-## PHASE 1 — Recherche
+Tu opères en 5 phases avec 3 sous-agents indépendants. **Aucune validation
+humaine intermédiaire.**
 
-Lis :
-- `data/ALSEN_editorial_input.md` (état actuel + audit de référence)
-- `data/ALSEN_synthese_input.md` (données marché à jour)
+Durée d'exécution attendue : **15-25 minutes**.
 
-Cherche via web search sur les 7 derniers jours :
-- Communiqués Sensorion (https://www.sensorion.com/investors/)
-- Communiqués FDA / EMA / ANSM
-- Communiqués concurrents (Lilly, Regeneron)
-- Publications scientifiques (PubMed, sites peer-reviewed)
-- Mouvements significatifs (OPA, partenariats, levées, AG)
+---
 
-## PHASE 2 — Génération des modifications candidates
+## Phase 1 — Sous-agent A (générateur)
 
-Pour chaque actualité significative détectée, propose une modification
-structurée (sans encore l'appliquer) :
+Lance un sous-agent en mode background avec ce prompt :
 
-### Modification candidate [N]
-- Section : [alertes / pipeline / perspectives.X]
-- Action : [AJOUTER / MODIFIER / SUPPRIMER]
-- Justification : [pourquoi]
-- Sources primaires : [URL 1 + date, URL 2 + date]
-- Confiance : [HAUTE / MOYENNE / FAIBLE]
-- Bloc YAML proposé :
-  ```yaml
-  [YAML exact à insérer ou remplacer]
-  ```
+> Tu es un analyste financier. Lis `data/ALSEN_editorial_input.md` qui
+> contient l'état actuel des sections éditoriales (alertes, pipeline,
+> perspectives), les sources actuellement référencées et les **garde-fous
+> d'audit** (structurels + hebdo durcis) pour Sensorion (ALSEN.PA).
+>
+> ⚠️ **NE LIS PAS** `content/ALSEN.yaml`, ni les fichiers
+> `data/ALSEN_routine_editorial_B_*.md` (autre agent).
+>
+> Web search sur les **7 derniers jours uniquement** :
+> - Communiqués Sensorion (sensorion.com/investors)
+> - FDA / EMA / ANSM / publications scientifiques
+> - Communiqués concurrents (Lilly via Akouos, Regeneron via Decibel/Otarmeni)
+> - Mouvements significatifs (OPA, partenariat, levée, AG, gouvernance)
+>
+> Génère **0 à 3 modifications candidates** sur les sections autorisées
+> (`alertes`, `pipeline`, `perspectives`). Si aucune actualité significative,
+> écris explicitement « RAS » dans ton fichier.
+>
+> Pour CHAQUE modification candidate :
+> - Section ciblée (alertes / pipeline / perspectives.X)
+> - Action (AJOUTER / MODIFIER / SUPPRIMER)
+> - Justification (1-3 lignes, basée sur l'actualité 7 jours)
+> - Sources primaires (URL 1 + date, URL 2 + date — minimum 2)
+> - Confiance (HAUTE / MOYENNE / FAIBLE)
+> - Bloc YAML proposé (texte exact à insérer ou remplacer)
+>
+> Écris dans `data/ALSEN_routine_editorial_A_proposal.md` (mode incrémental :
+> squelette d'abord, puis enrichis).
 
-Si AUCUNE actualité significative cette semaine, passe directement à
-la phase 4 avec « RAS, aucune modification proposée ».
+## Phase 2 — Sous-agent B (auditeur indépendant)
 
-## PHASE 3 — AUTO-AUDIT (étape critique)
+⚠️ **CRITIQUE : ce sous-agent NE VOIT PAS la proposition de A.**
 
-Pour chaque modification candidate, applique cette CHECKLIST BINAIRE
-stricte. Réponds OUI ou NON pour chaque test, sans commentaire
-intermédiaire :
+Lance en parallèle de A (background) avec ce prompt :
 
-TESTS BLOQUANTS (un seul NON = modification rejetée) :
+> Tu es un auditeur éditorial indépendant. Tu reçois UNIQUEMENT
+> `data/ALSEN_editorial_input.md`.
+>
+> ⚠️ Tu N'AS PAS accès aux fichiers `data/ALSEN_routine_editorial_A_*.md`,
+> ni à `content/ALSEN.yaml`. Tu fais ta propre recherche depuis zéro.
+>
+> Génère TES propres 0-3 modifications candidates avec les mêmes consignes
+> que A : sections autorisées uniquement, sources primaires datées 7 jours,
+> bloc YAML exact.
+>
+> Web search sur les 7 derniers jours (mêmes sources prioritaires que A).
+>
+> Écris dans `data/ALSEN_routine_editorial_B_proposal.md` (mode incrémental).
 
-- **T1.** La modification fournit-elle au moins une URL source primaire
-  accessible et datée < 30 jours ?  [OUI/NON]
-- **T2.** La source est-elle classée fiable (sites IR officiels, FDA,
-  EMA, BusinessWire, PubMed, presse spécialisée tier 1) — pas un forum,
-  pas un blog, pas un agrégateur sans attribution ?  [OUI/NON]
-- **T3.** La modification est-elle de confiance HAUTE (2 sources
-  concordantes minimum) ?  [OUI/NON]
-- **T4.** Le bloc YAML proposé est-il syntaxiquement valide (pas de
-  doublons de clés, pas de chaîne avec « : » sans guillemets) ?  [OUI/NON]
-- **T5.** La modification touche-t-elle UNIQUEMENT les sections
-  autorisées (`alertes`, `pipeline`, `perspectives`) ?  [OUI/NON — NON
-  si elle touche métadonnées, liens, `synthese_ia`, ou `sources`]
-- **T6.** La modification est-elle COHÉRENTE avec l'audit du 01/05/2026
-  (pas de retour à « Akouos via Regeneron », pas de « Sanofi 11 % »,
-  pas de « SENS-40 Phase 2 active multi-indications ») ?  [OUI/NON]
-- **T7.** Le texte proposé évite-t-il TOUS ces termes : « je »,
-  « selon moi », « à mon avis », « il faut », « consensus » (sans
-  bureau d'études nommé), « objectif de cours », « recommandation
-  d'achat », « potentiel de hausse » ?  [OUI/NON]
-- **T8.** La modification, si elle SUPPRIME une alerte, fournit-elle
-  une justification explicite (l'événement de la semaine rend cette
-  alerte obsolète) ?  [OUI/NON ou N/A si pas une suppression]
+## Phase 3 — Application T1-T6 par chaque agent
 
-APRÈS LA CHECKLIST, AUTO-CHALLENGE :
+Chaque sous-agent (A et B) applique T1-T6 sur SES modifications candidates :
 
-Pour chaque modification ayant passé tous les tests bloquants,
-réécris-la en imaginant que tu es un analyste sceptique cherchant
-3 raisons de la rejeter. Pour chaque raison trouvée, évalue
-honnêtement si elle est légitime. Si UNE SEULE raison est légitime,
-reclasse la modification en BLOQUÉE.
+> **T1.** Source primaire datée < 7 jours pour modif hebdo ? OUI/NON
+> **T2.** Source fiable (IR officiel, FDA/EMA/AMF, presse tier 1) ? OUI/NON
+> **T3.** Au moins 2 sources concordantes (HAUTE) ? OUI/NON
+> **T4.** Pas de superlatifs marketing ? OUI/NON
+> **T5.** Pas de projection chiffrée non sourcée ? OUI/NON
+> **T6.** Statut concurrent vérifié au présent ? OUI/N/A
+>
+> Décisions :
+> - T1 ou T2 = NON → modification SUPPRIMÉE
+> - T3 = NON → REFORMULÉE en mode « Selon [source unique] »
+> - T4 = NON → REFORMULÉE neutre
+> - T5 = NON → projection SUPPRIMÉE
+> - T6 = NON → vérifier ou SUPPRIMÉE
+>
+> ⚠️ Application des **garde-fous hebdo durcis** (section du dump) :
+> - Toute modif chiffre clé = 3 sources primaires concordantes requises
+> - Suppression alerte présente depuis < 30 jours = bloquée sauf événement
+>   explicite
+> - Modif touchant garde-fou structurel = bloquée par R3
+> - Claim FAIBLE ignorée
+>
+> Écris dans `data/ALSEN_routine_editorial_A_audit.md` et
+> `data/ALSEN_routine_editorial_B_audit.md`.
 
-## PHASE 4 — Décision et exécution
+## Phase 4 — Sous-agent C (méta-audit léger)
 
-### Cas 1 : AUCUNE modification candidate
+⚠️ **CRITIQUE : C ne voit pas le raisonnement de A, B, ni de l'orchestrateur.**
 
-- Crée `data/ALSEN_editorial_log_[YYYY-MM-DD].md` avec :
-  ```
-  ## Aucune actualité significative cette semaine
-  Sections éditoriales actuelles préservées. Sources consultées : [liste]
-  ```
-- Commit message : `editorial: aucune actualité ALSEN [YYYY-MM-DD]`
-- Push sur main
+Lance C une fois A et B terminés avec ce prompt :
 
-### Cas 2 : TOUTES les modifications passent l'audit
+> Tu es un méta-auditeur éditorial léger. Tu reçois 4 fichiers :
+> - `data/ALSEN_routine_editorial_A_proposal.md`
+> - `data/ALSEN_routine_editorial_A_audit.md`
+> - `data/ALSEN_routine_editorial_B_proposal.md`
+> - `data/ALSEN_routine_editorial_B_audit.md`
+>
+> ⚠️ NE LIS PAS `content/ALSEN.yaml` ni `data/ALSEN_editorial_input.md`.
+>
+> CHECKLIST MÉTA-AUDIT LÉGER :
+> **M1.** Modifications A et B se recoupent-elles ? (consensus = modification
+>          probable, divergence = à arbitrer)
+> **M2.** Cohérence avec garde-fous structurels d'AUDIT_REFERENCE_RAPPEL ?
+>          Aucun fait des audits baseline / recalCplus contredit ?
+> **M3.** Aucune section interdite touchée (`meta`, `liens`, `synthese_ia`,
+>          `sources`) ?
+> **M4.** Sources primaires datées < 7 jours pour les modifs hebdo ?
+> **M5.** Pas de modification si actualité non significative (faux positif
+>          marketing à filtrer) ?
+>
+> Pour chaque check : ✅ ACCORD / ⚠️ NUANCE / ❌ DÉSACCORD avec justification.
+>
+> Écris dans `data/ALSEN_routine_editorial_C_meta_audit.md`.
 
-- Applique les modifications dans `content/ALSEN.yaml`
-- Crée `data/ALSEN_editorial_log_[YYYY-MM-DD].md` avec :
-  ```
-  ## X modification(s) appliquée(s) (audit OK)
-  [détail de chaque modif + sources + résultats checklist]
-  ```
-- Commit message unique : `editorial: refresh hebdomadaire ALSEN [YYYY-MM-DD] (audit OK, X modifs)`
-- Push sur main
+## Phase 5 — Auto-arbitrage strict par l'orchestrateur
 
-### Cas 3 : Modifications mixtes (certaines passent, certaines bloquent)
+Après C terminé, l'orchestrateur applique automatiquement :
 
-- Applique SEULEMENT les modifications ayant passé l'audit
-- Crée `data/ALSEN_editorial_log_[YYYY-MM-DD].md` avec deux sections :
-  ```
-  ## Modifications appliquées (audit OK) : X
-  [détail]
-  ## Modifications bloquées : Y
-  [détail + raison du blocage par test échoué]
-  ```
-- Commit message : `editorial: refresh partiel ALSEN [YYYY-MM-DD] (audit OK X / KO Y)`
-- Push sur main
+**R1.** Modification = consensus A ∩ B + accord C → **APPLIQUER** dans
+       `content/ALSEN.yaml`.
 
-### Cas 4 : TOUTES les modifications bloquent l'audit
+**R2.** Modification chez A seul OU B seul + accord C → **APPLIQUER en
+       mode « Selon [source] »** (attribution prudente dans le YAML).
 
-- NE PAS modifier `content/ALSEN.yaml`
-- Crée `data/ALSEN_editorial_log_[YYYY-MM-DD].md` avec :
-  ```
-  ## Toutes modifications bloquées par l'audit
-  [détail + raisons]
-  ```
-- Commit message : `editorial: refresh bloqué ALSEN [YYYY-MM-DD] (audit KO sur tout)`
-- Push sur main (juste le rapport)
-- L'utilisateur lira le rapport et décidera manuellement
+**R3.** Modification + désaccord C (M1-M5 = ⚠️ ou ❌) → **NE PAS
+       APPLIQUER**, flagger dans le rapport.
+
+**R4.** Toute modification touchant un garde-fou structurel
+       (AUDIT_REFERENCE_RAPPEL["ALSEN.PA"].garde_fous_structurels) →
+       **NE PAS APPLIQUER**, flagger dans le rapport.
+
+**R5.** Si AUCUNE modification consensuelle après audit → commit avec
+       message « editorial: RAS aucune actualité significative ALSEN
+       YYYY-MM-DD » (commit non vide : juste le rapport-log).
+
+## Exécution finale
+
+L'orchestrateur :
+1. Modifie `content/ALSEN.yaml` SEULEMENT sur les sections `alertes`,
+   `pipeline`, `perspectives` (jamais `meta`, `liens`, `synthese_ia`,
+   `sources`).
+2. Écrit `data/ALSEN_routine_editorial_log_YYYY-MM-DD.md` avec :
+   - Modifications appliquées (R1, R2)
+   - Modifications bloquées (R3, R4) avec règle invoquée
+   - Verdict méta-audit C par check M1-M5
+3. Commit message :
+   - Si modifs appliquées : `editorial: refresh hebdomadaire ALSEN
+     YYYY-MM-DD (X modifs)`
+   - Si RAS : `editorial: RAS aucune actualité significative ALSEN
+     YYYY-MM-DD`
+4. Push direct sur main
 
 ## Règles strictes
 
-- JAMAIS modifier `content/ALSEN.yaml` sans avoir passé la checklist
-  binaire en phase 3
-- JAMAIS modifier les sections : métadonnées, liens, `synthese_ia`,
-  `sources` (gérées à part)
-- JAMAIS commit les modifications ET le rapport dans des commits
-  séparés — TOUJOURS un seul commit qui inclut les deux
-- Si la phase 3 échoue partiellement, PRÉFÉRER ne rien faire qu'appliquer
-  une modification douteuse
-- L'audit du 01/05/2026 est intouchable : aucune modification ne peut
-  contredire ses conclusions
+- JAMAIS modifier les sections `meta`, `liens`, `synthese_ia` (gérée par
+  la routine synthèse), `sources` (gérée à part).
+- JAMAIS skipper une phase. Si A timeout, relancer A.
+- JAMAIS dépasser 3 modifications candidates par cycle hebdo.
+- TOUJOURS commit + push (même un commit RAS — traçabilité).
+- L'audit baseline 01/05/2026 et le recalibrage Pattern C+ 02/05/2026
+  sont **intouchables** — leurs garde-fous structurels priment.
 
-## Rapport final attendu en sortie de routine
+## Rapport final attendu
 
-- Phase 1 : X actualités scannées
-- Phase 2 : Y modifications candidates générées
-- Phase 3 : Z modifications validées par l'audit, W bloquées
-- Phase 4 : décision prise (cas 1/2/3/4)
+- N modifications appliquées (R1, R2) + détail
+- N modifications bloquées (R3, R4) + raison
 - SHA du commit
-- URL du rapport `data/ALSEN_editorial_log_[date].md`
+- URL du log : `data/ALSEN_routine_editorial_log_YYYY-MM-DD.md`
