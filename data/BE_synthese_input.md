@@ -1,6 +1,6 @@
 # Données pour synthèse IA — Bloom Energy (BE)
 
-**Date de génération du dump** : 2026-05-02T10:33:41+00:00
+**Date de génération du dump** : 2026-05-02T13:33:34+00:00
 **Source** : yfinance + content/BE.yaml
 
 ---
