@@ -187,35 +187,90 @@ automatiquement — ils restent volontairement figés pour traçabilité.
 
 ---
 
-## Routines Claude planifiées
+## Routines Claude planifiées (Pattern C+ allégé)
 
-Deux routines Claude planifiées tournent chaque lundi matin et écrivent
-directement sur `main`. Elles consomment des dumps Markdown produits à
-chaque build CI dans `data/` et suivent des prompts-recettes versionnés
-dans `prompts/`.
+Deux routines Claude planifiées tournent chaque lundi matin **par fiche**
+et écrivent directement sur `main`. Elles consomment des dumps Markdown
+produits à chaque build CI dans `data/` et suivent des prompts-recettes
+versionnés dans `prompts/`.
+
+Toutes les routines appliquent le **Pattern C+ allégé** : sous-agent A
+(générateur), sous-agent B (auditeur indépendant aveugle), sous-agent C
+(méta-audit léger), puis auto-arbitrage R1-R5 par l'orchestrateur.
+Aucune validation humaine intermédiaire — les conclusions des audits
+baseline (`data/<TICKER>_audit_*.md`) et des recalibrages Pattern C+
+(`data/<TICKER>_recalCplus_*.md`) constituent des **garde-fous figés**
+intouchables, codifiés dans `AUDIT_REFERENCE_RAPPEL` (voir
+`src/synthesis_dump.py`).
 
 ### Routine synthèse (lundi 9h00)
 
-Régénère la section `synthese_ia` de `content/ALSEN.yaml` (score 0-10,
-force du signal, texte d'analyse factuelle neutre, facteurs ± , date).
-Input : `data/ALSEN_synthese_input.md`. Recette : `prompts/synthese_ALSEN.md`.
+Régénère la section `synthese_ia` du YAML d'une fiche (score 0-10,
+force du signal, texte 3 paragraphes, 5 facteurs +/-, date).
+Input : `data/<TICKER>_synthese_input.md`.
+Recette : `prompts/synthese_<TICKER>.md`.
+Durée : 15-25 minutes.
 
-### Routine éditoriale hebdomadaire avec auto-audit (lundi 9h15)
+### Routine éditoriale (lundi 9h15)
 
-Une seconde routine Claude planifiée chaque lundi à 9h15 (15 min après
-la routine synthèse) analyse l'actualité et propose des mises à jour
-éditoriales sur `content/ALSEN.yaml`. Avant tout commit, un auto-audit
-strict vérifie chaque modification selon une checklist binaire (sources
-primaires, cohérence avec l'audit du 01/05/2026, format YAML, etc.).
-Si l'audit échoue, aucune modification n'est appliquée — un rapport
-d'échec est créé à la place dans `data/ALSEN_editorial_log_[date].md`.
+Modifie les sections `alertes`, `pipeline`, `perspectives` selon
+l'actualité 7 jours (max 3 modifications par cycle).
+Input : `data/<TICKER>_editorial_input.md` (état actuel + garde-fous
+structurels + garde-fous hebdo durcis).
+Recette : `prompts/editorial_<TICKER>.md`.
+Durée : 15-25 minutes.
 
-L'utilisateur peut consulter les rapports hebdomadaires pour comprendre
-ce qui a été appliqué ou bloqué et, le cas échéant, appliquer
-manuellement les modifications bloquées.
+### Architecture des garde-fous
 
-Input : `data/ALSEN_editorial_input.md` (état actuel + garde-fous audit).
-Recette : `prompts/editorial_ALSEN.md`.
+`AUDIT_REFERENCE_RAPPEL[ticker]` (dans `src/synthesis_dump.py`) contient
+deux listes par ticker :
+
+- **`garde_fous_structurels`** : faits stables issus des audits baseline
+  + recalibrages Pattern C+. Toute modification les contredisant est
+  bloquée par R3/R6 du méta-audit C.
+- **`garde_fous_hebdo_durcis`** : règles procédurales communes (3 sources
+  primaires concordantes pour un chiffre clé, suppression d'alerte
+  < 30 jours bloquée, claim FAIBLE ignorée, modif score IA > 1 point
+  exigeant justification 7 jours).
+
+Ces deux blocs sont injectés UNIQUEMENT pour le ticker courant dans les
+dumps `_synthese_input.md` et `_editorial_input.md` — pas de pollution
+croisée entre fiches.
+
+### Procédure : créer ou mettre à jour les routines Claude
+
+Dans Claude (claude.ai/web ou app), pour chaque routine planifiée :
+
+1. **Pour ALSEN** (existant) : mettre à jour les 2 routines Claude
+   existantes en remplaçant leur prompt par le contenu actuel des
+   fichiers :
+   - `prompts/synthese_ALSEN.md` (routine synthèse, planifiée lundi 9h00)
+   - `prompts/editorial_ALSEN.md` (routine éditoriale, planifiée lundi 9h15)
+
+2. **Pour BE** (à créer) : créer 2 nouvelles routines planifiées avec
+   les contenus de :
+   - `prompts/synthese_BE.md` (lundi 9h00 ou autre créneau)
+   - `prompts/editorial_BE.md` (lundi 9h15)
+
+3. **Pour une nouvelle fiche** (futures valeurs) :
+   - Créer `content/<TICKER>.yaml` (cf. structure d'une fiche).
+   - Ajouter une entrée `AUDIT_REFERENCE_RAPPEL["<TICKER>"]` dans
+     `src/synthesis_dump.py` (au moins les garde-fous baseline ; les
+     hebdo durcis utilisent `HEBDO_DURCIS_DEFAULTS`).
+   - Copier `prompts/_template_synthese.md` en
+     `prompts/synthese_<TICKER>.md` et remplacer les `{TICKER}`,
+     `{TICKER_BASE}`, `{NOM}`, `{IR_URL}`.
+   - Idem pour `prompts/_template_editorial.md`.
+   - Créer les 2 routines Claude planifiées correspondantes.
+
+### Surveillance
+
+Chaque cycle hebdo produit un fichier-log dans `data/` :
+- `data/<TICKER>_routine_synthese_log_<date>.md`
+- `data/<TICKER>_routine_editorial_log_<date>.md`
+
+Ces logs détaillent les modifications appliquées (R1, R2) et bloquées
+(R3, R4) avec la règle invoquée. Consultables via GitHub.
 
 ---
 
